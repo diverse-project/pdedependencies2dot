@@ -6,10 +6,20 @@ Generates a dot graph by reading all the OSGI `MANIFEST.MF` files and the Eclips
 
 ![Example](https://raw.githubusercontent.com/diverse-project/pdedependencies2dot/master/example.png)
 
-## TODOs
+## Options
 
-- CLI interface
-- README with the options
+~~~~
+Usage: java -jar pdedependencies2dot.jar [options...] <folder1,folder2,...>
+
+ --allowedPrefixes=STRING  : List of allowed prefixes. If given, a found
+                             plugin/feature is not taken into account if its id
+                             doesn't match one of these prefixes.
+ --filteredPrefixes=STRING : List of forbidden prefixes. If given, a found
+                             plugin/feature is not taken into account if its id
+                             matches one of these prefixes.
+ --outputFile=FILE         : Path to the output file. If given, will write into
+                             this file instead of printing to the console.
+~~~~
 
 ## Future work
 
