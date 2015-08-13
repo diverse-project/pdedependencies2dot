@@ -15,3 +15,5 @@ xtend-gen/*
 # Other
 *._trace
 bin/*
+.classpath
+.project
