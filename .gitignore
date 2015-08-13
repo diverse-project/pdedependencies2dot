@@ -10,13 +10,14 @@
 hs_err_pid*
 
 # Xtend
-xtend-gen/*
+**/xtend-gen/*
 
 # Other
 *._trace
 bin/*
 .classpath
 .project
+.settings
 
 # Maven
-target/*
+/target/
