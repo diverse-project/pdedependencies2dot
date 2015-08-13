@@ -10,3 +10,7 @@ Generates a dot graph from a set of OSGI/Eclipse modules, by reading all the `MA
 - méthode main + options CLI
 - regroupement des plugins en features
 - README with the options
+
+## Future work
+
+zest visualization within eclipse?
