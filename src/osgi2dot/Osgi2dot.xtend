@@ -9,11 +9,14 @@ import java.nio.file.Path
 import java.nio.file.PathMatcher
 import java.nio.file.Paths
 import java.nio.file.SimpleFileVisitor
+import java.nio.file.StandardOpenOption
 import java.nio.file.attribute.BasicFileAttributes
 import java.util.HashMap
 import java.util.HashSet
 import java.util.Map
 import java.util.Set
+import java.util.jar.Attributes
+import java.util.jar.Manifest
 
 import static java.nio.file.FileVisitResult.*
 
@@ -30,9 +33,9 @@ class Osgi2dot {
 	}
 
 	public static final Set<String> PREFIXES = #{
-		"org.gemoc",
-	"fr.inria",
-	 "fr.obeo"
+		"org.gemoc"
+	//"fr.inria",
+	//"fr.obeo"
 	}
 
 	public static final Set<String> PREFIXESNOT = #{
@@ -92,32 +95,14 @@ class Osgi2dot {
 
 	public static val Map<String, Set<String>> graph = new HashMap
 
-	private static def String parseName(String line) {
-		var String result = line
-		result = result.replace("Bundle-SymbolicName:", "")
+	private static def String parseManifestValue(String value) {
+		var String result = value
 		result = result.replaceAll(" ", "");
 		val indexColon = result.indexOf(";");
 		if(indexColon != -1) {
 			result = result.substring(0, indexColon)
 		}
 		return result;
-	}
-
-	private static def String parseDep(String line) {
-		var result = line.replaceAll(" ", "")
-		result = result.replace("Require-Bundle:", "")
-
-		val index = result.indexOf(";")
-		if(index != -1) {
-			result = result.substring(0, index)
-		} else {
-			val indexComma = result.indexOf(",")
-			if(indexComma != -1) {
-				result = result.substring(0, indexComma)
-			}
-		}
-
-		return result
 	}
 
 	private static def boolean okPrefix(String n) {
@@ -133,38 +118,31 @@ class Osgi2dot {
 		}
 	}
 
-	public static def processManifest(Path manifest) {
-		val lines = Files.readAllLines(manifest)
+	static val String BUNDLE_SYMBOLIC_NAME = "Bundle-SymbolicName"
+	static val String REQUIRE_BUNDLE = "Require-Bundle"
 
-		var boolean isParsingDep = false;
-		var name = ""
-		val Set<String> deps = new HashSet<String>
-		for (String l : lines) {
+	public static def void processManifest(Path manifestPath) {
+		val inputStream = Files.newInputStream(manifestPath,
+			{
+				StandardOpenOption.READ
+			})
+		var Manifest manifest = new Manifest(inputStream)
 
-			// Parsing bundle name
-			if(l.startsWith("Bundle-SymbolicName:")) {
-				name = parseName(l)
+		val Attributes attributes = manifest.getMainAttributes();
+
+		val bundleName = attributes.keySet.findFirst[a|
+			(a as Attributes.Name).equals(new Attributes.Name(BUNDLE_SYMBOLIC_NAME))]
+		val requireName = attributes.keySet.findFirst[a|
+			(a as Attributes.Name).equals(new Attributes.Name(REQUIRE_BUNDLE))]
+
+		val name = parseManifestValue(attributes.get(bundleName) as String)
+		val allRequired = attributes.get(requireName) as String
+
+		if(allRequired != null && !allRequired.equals("")) {
+			for (r : allRequired.split(",")) {
+				addDep(name, parseManifestValue(r))
 			}
-
-			// Parsing dependencies
-			if(l.startsWith("Require-Bundle:")) {
-				isParsingDep = true;
-			}
-
-			if(!(l.startsWith(" ") || l.startsWith("Require"))) {
-				isParsingDep = false
-			}
-
-			if(isParsingDep) {
-				deps.add(parseDep(l))
-			}
-
 		}
-
-		for (d : deps) {
-			addDep(name, d)
-		}
-
 	}
 
 	public static def String toDot() {
