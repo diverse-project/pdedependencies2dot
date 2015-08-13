@@ -1,2 +1,12 @@
 # pdedependencies2dot
-Program to generate a dot graph from a set of OSGI/Eclipse modules
+
+## Description
+
+Generates a dot graph from a set of OSGI/Eclipse modules, by reading all the MANIFEST
+
+## TODOs
+
+- pom.xml
+- méthode main + options CLI
+- regroupement des plugins en features
+- README
