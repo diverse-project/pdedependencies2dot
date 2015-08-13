@@ -1,6 +1,5 @@
 package osgi2dot
 
-import java.io.File
 import java.io.PrintWriter
 import java.nio.file.FileSystems
 import java.nio.file.FileVisitResult
@@ -11,9 +10,7 @@ import java.nio.file.Paths
 import java.nio.file.SimpleFileVisitor
 import java.nio.file.StandardOpenOption
 import java.nio.file.attribute.BasicFileAttributes
-import java.util.HashMap
 import java.util.HashSet
-import java.util.Map
 import java.util.Set
 import java.util.jar.Attributes
 import java.util.jar.Manifest
@@ -93,9 +90,10 @@ class Osgi2dot {
 		}
 	}
 
-	public static val Map<String, Set<String>> pluginsGraph = new HashMap
-	public static val Map<String, Set<String>> featureClusters = new HashMap
-	public static val Map<String, Set<String>> featureRequire = new HashMap
+	//	public static val Map<String, Set<String>> pluginsGraph = new HashMap
+	//	public static val Map<String, Set<String>> featureClusters = new HashMap
+	//	public static val Map<String, Set<String>> featureRequire = new HashMap
+	static val DependencyGraph graph = new DependencyGraph;
 
 	private static def String parseManifestValue(String value) {
 		var String result = value
@@ -113,10 +111,7 @@ class Osgi2dot {
 
 	private static def void addDep(String name, String dep) {
 		if(okPrefix(name) && okPrefix(dep)) {
-			if(!pluginsGraph.containsKey(name)) {
-				pluginsGraph.put(name, new HashSet)
-			}
-			pluginsGraph.get(name).add(dep)
+			graph.getPlugin(name).addDependency(graph.getPlugin(dep))
 		}
 	}
 
@@ -164,6 +159,7 @@ class Osgi2dot {
 		}
 	}
 
+
 	public static def void processFeatureXML(Path featurePath) {
 		val SAXParserFactory factory = SAXParserFactory.newInstance();
 		factory.setValidating(true);
@@ -173,60 +169,58 @@ class Osgi2dot {
 		saxParser.parse(featurePath.toFile, handler)
 
 		if(okPrefix(handler.featureName) && !handler.containedPlugins.empty) {
-			val pluginsSet = new HashSet
-			val requireSet = new HashSet
-			featureClusters.put(handler.featureName, pluginsSet)
-			featureRequire.put(handler.featureName, requireSet)
+			val featureCluster = graph.getFeature(handler.featureName)
 			for (p : handler.containedPlugins) {
 				if(okPrefix(p)) {
-					pluginsSet.add(p)
+					featureCluster.addPlugin(p)
 				}
 			}
 
 			for (r : handler.requiredFeatures) {
 				if(okPrefix(r)) {
-					requireSet.add(r)
+					featureCluster.addRequiredFeature(graph.getFeature(r))
 				}
 			}
 		}
 
 	}
 
-	static var int i = 1;
-
 	public static def String clusterName(String featureName) {
 		return "cluster_" + featureName
 	}
+
 
 	public static def String toDot() {
 		return '''
 digraph awesomeGraph {
 	compound=true;
-	node [shape=box, color=black,style=filled,fillcolor=white];
+	node [shape=box, color=black,style=filled,fillcolor="«FeatureCluster.getRootNodeColor»"];
 	
-	«FOR name : pluginsGraph.keySet»
-		«FOR dep : pluginsGraph.get(name)»
-			"«name»" -> "«dep»";
-		«ENDFOR» 
-	«ENDFOR»
-	
-	«FOR featureName : featureClusters.keySet»
-		subgraph "«clusterName(featureName)»" {
+
+	«FOR featureCluster : graph.features» 
+		subgraph "«clusterName(featureCluster.name)»" {
+			node [shape=box, color=black,style=filled,fillcolor="«featureCluster.nodeColor»"];
 			style=filled;
-			color=lightgrey;
-			label="«featureName»";
-			«FOR plugin : featureClusters.get(featureName)»
-			"«plugin»";
+			color="«featureCluster.featureColor»";
+			label="«featureCluster.name»";
+			«FOR plugin : featureCluster.plugins»
+			"«plugin.name»";
 			«ENDFOR»
-			
-			
 		}
 	«ENDFOR»
 	
-	«FOR featureName : featureRequire.keySet»
-		«FOR req : featureRequire.get(featureName)»
-		«IF featureClusters.containsKey(featureName) && featureClusters.containsKey(req)»
-		"«featureClusters.get(featureName).get(0)»"-> "«featureClusters.get(req).get(0)»" [ltail="«clusterName(featureName)»",lhead="«clusterName(req)»", style="setlinewidth(8)"];
+	«FOR plugin : graph.allPlugins»
+		«FOR dep : plugin.dependencies»
+			"«plugin.name»" -> "«dep.name»" [color="«plugin.color»"];
+		«ENDFOR» 
+	«ENDFOR»
+	
+	
+	«FOR featureCluster : graph.features»
+		«FOR req : featureCluster.requiredFeatures»
+		«IF !featureCluster.plugins.empty && !req.plugins.empty»
+		"«featureCluster.plugins.get(0).name»"-> "«req.plugins.get(0).name»" [ltail="«clusterName(featureCluster.name)»",lhead="«clusterName(
+			req.name)»", style="setlinewidth(8)", color="«featureCluster.edgeColor»"];
 		«ENDIF»
 		«ENDFOR»
 	«ENDFOR»
@@ -240,12 +234,14 @@ digraph awesomeGraph {
 		for (p : PATHS)
 			Files.walkFileTree(Paths.get(p), finder);
 
-		for (p : finder.manifestResults) {
-			processManifest(p)
-		}
 		for (p : finder.featureResults) {
 			processFeatureXML(p)
 		}
+
+		for (p : finder.manifestResults) {
+			processManifest(p)
+		}
+	
 
 		val PrintWriter out = new PrintWriter("/tmp/yay.dot");
 
