@@ -1,16 +1,19 @@
 package osgi2dot
 
+import java.io.File
+import java.io.FileNotFoundException
 import java.io.PrintWriter
 import java.nio.file.FileSystems
 import java.nio.file.FileVisitResult
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.PathMatcher
-import java.nio.file.Paths
 import java.nio.file.SimpleFileVisitor
 import java.nio.file.StandardOpenOption
 import java.nio.file.attribute.BasicFileAttributes
+import java.util.ArrayList
 import java.util.HashSet
+import java.util.List
 import java.util.Set
 import java.util.jar.Attributes
 import java.util.jar.Manifest
@@ -23,77 +26,39 @@ import static java.nio.file.FileVisitResult.*
 
 class Osgi2dot {
 
-	public static final Set<String> PATHS = #{
-		"/home/ebousse/Dev/gemoc-dev/org/gemoc/execution",
-		"/home/ebousse/Dev/gemoc-dev/org/gemoc/gemoc_commons",
-		"/home/ebousse/Dev/gemoc-dev/org/gemoc/gemoc_language_workbench",
-		"/home/ebousse/Dev/gemoc-dev/org/gemoc/gemoc_modeling_workbench",
-		"/home/ebousse/Dev/gemoc-dev/org/gemoc/gemoc_studio",
-		//"/home/ebousse/Dev/gemoc-dev/org/gemoc/MoCC",
-		"/home/ebousse/Dev/gemoc-dev/fr"
+	static val String BUNDLE_SYMBOLIC_NAME = "Bundle-SymbolicName"
+	static val String REQUIRE_BUNDLE = "Require-Bundle"
+
+	// Mandatory inputs
+	private List<File> folders = new ArrayList<File>();
+
+	// Optional inputs
+	private List<String> allowedPrefixes;
+	private List<String> filteredPrefixes;
+	private File outputFile;
+
+	// Transient
+	private val DependencyGraph graph = new DependencyGraph;
+
+	new(List<File> folders) {
+		this.folders.addAll(folders)
 	}
 
-	public static final Set<String> PREFIXES = #{
-		"org.gemoc"
-	//"fr.inria",
-	//"fr.obeo"
+	public def void addAllowedPrefixes(String... prefixes) {
+		if(allowedPrefixes == null)
+			this.allowedPrefixes = new ArrayList
+		this.allowedPrefixes.addAll(prefixes)
 	}
 
-	public static final Set<String> PREFIXESNOT = #{
-		"org.gemoc.gemoc_language_workbench.documentation",
-		"org.gemoc.gemoc_language_workbench.guideline",
-		"org.gemoc.gemoc_language_workbench.process",
-		"org.gemoc.gemoc_language_workbench.dashboard",
-		"org.gemoc.commons",
-		"org.gemoc.execution.engine.trace.model.edit",
-		"org.gemoc.gemoc_language_workbench.conf.model.edit",
-		"org.gemoc.execution.engine.commons",
-		"org.gemoc.gemoc_language_workbench.sample",
-		"org.gemoc.gemoc_language_workbench.utils"
+	public def void addFilteredPrefixes(String... prefixes) {
+		if(filteredPrefixes == null)
+			this.filteredPrefixes = new ArrayList
+		this.filteredPrefixes.addAll(prefixes)
 	}
 
-	/**
-	 * From https://docs.oracle.com/javase/tutorial/essential/io/find.html
-	 */
-	public static class Finder extends SimpleFileVisitor<Path> {
-
-		private final PathMatcher manifestMatcher;
-		private final PathMatcher featureMatcher;
-
-		new() {
-			manifestMatcher = FileSystems.getDefault().getPathMatcher("glob:MANIFEST.MF");
-			featureMatcher = FileSystems.getDefault().getPathMatcher("glob:feature.xml");
-		}
-
-		Set<Path> manifestResults = new HashSet<Path>;
-		Set<Path> featureResults = new HashSet<Path>;
-
-		// Compares the glob pattern against
-		// the file or directory name.
-		def void find(Path file) {
-			val Path name = file.getFileName();
-			if(name != null) {
-				if(manifestMatcher.matches(name)) {
-					manifestResults.add(file);
-				} else if(featureMatcher.matches(name)) {
-					featureResults.add(file)
-				}
-			}
-		}
-
-		// Invoke the patternmatching
-		// method on each file.
-		@Override
-		public override FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
-			find(file);
-			return CONTINUE;
-		}
+	public def void setOutputFile(File file) {
+		outputFile = file;
 	}
-
-	//	public static val Map<String, Set<String>> pluginsGraph = new HashMap
-	//	public static val Map<String, Set<String>> featureClusters = new HashMap
-	//	public static val Map<String, Set<String>> featureRequire = new HashMap
-	static val DependencyGraph graph = new DependencyGraph;
 
 	private static def String parseManifestValue(String value) {
 		var String result = value
@@ -105,20 +70,20 @@ class Osgi2dot {
 		return result;
 	}
 
-	private static def boolean okPrefix(String n) {
-		return PREFIXES.exists[p|n.startsWith(p)] && !PREFIXESNOT.exists[p|n.startsWith(p)]
+	private def boolean okPrefix(String n) {
+		val boolean hasAllowedPrefixes = allowedPrefixes != null && !allowedPrefixes.isEmpty
+		val boolean hasFilteredPrefixes = filteredPrefixes != null && !filteredPrefixes.isEmpty
+		return (!hasAllowedPrefixes || allowedPrefixes.exists[p|n.startsWith(p)]) &&
+			(hasFilteredPrefixes && !filteredPrefixes.exists[p|n.startsWith(p)])
 	}
 
-	private static def void addDep(String name, String dep) {
+	private def void addDep(String name, String dep) {
 		if(okPrefix(name) && okPrefix(dep)) {
 			graph.getPlugin(name).addDependency(graph.getPlugin(dep))
 		}
 	}
 
-	static val String BUNDLE_SYMBOLIC_NAME = "Bundle-SymbolicName"
-	static val String REQUIRE_BUNDLE = "Require-Bundle"
-
-	public static def void processManifest(Path manifestPath) {
+	private def void processManifest(Path manifestPath) {
 		val inputStream = Files.newInputStream(manifestPath,
 			{
 				StandardOpenOption.READ
@@ -142,25 +107,7 @@ class Osgi2dot {
 		}
 	}
 
-	static class FeatureXMLHandler extends DefaultHandler {
-		String featureName
-		Set<String> containedPlugins = new HashSet
-		Set<String> requiredFeatures = new HashSet
-
-		override startElement(String uri, String localName, String qName, org.xml.sax.Attributes attributes) throws SAXException {
-			if(qName.equals("feature"))
-				featureName = attributes.getValue("id")
-			else if(qName.equals("plugin"))
-				containedPlugins.add(attributes.getValue("id"))
-			else if(qName.equals("import")) {
-				requiredFeatures.add(attributes.getValue("feature"))
-			}
-
-		}
-	}
-
-
-	public static def void processFeatureXML(Path featurePath) {
+	public def void processFeatureXML(Path featurePath) {
 		val SAXParserFactory factory = SAXParserFactory.newInstance();
 		factory.setValidating(true);
 
@@ -185,12 +132,11 @@ class Osgi2dot {
 
 	}
 
-	public static def String clusterName(String featureName) {
+	private static def String clusterName(String featureName) {
 		return "cluster_" + featureName
 	}
 
-
-	public static def String toDot() {
+	private def String generateDot() {
 		return '''
 digraph awesomeGraph {
 	compound=true;
@@ -228,11 +174,11 @@ digraph awesomeGraph {
 		'''
 	}
 
-	public static def void main(String[] args) {
+	public def void generate() {
 
 		val Finder finder = new Finder();
-		for (p : PATHS)
-			Files.walkFileTree(Paths.get(p), finder);
+		for (p : folders)
+			Files.walkFileTree(p.toPath, finder);
 
 		for (p : finder.featureResults) {
 			processFeatureXML(p)
@@ -241,15 +187,78 @@ digraph awesomeGraph {
 		for (p : finder.manifestResults) {
 			processManifest(p)
 		}
-	
 
-		val PrintWriter out = new PrintWriter("/tmp/yay.dot");
+		val String result = generateDot
 
-		println(toDot)
-		out.print(toDot);
+		if(outputFile != null) {
+			var PrintWriter out;
+			try {
+				out = new PrintWriter(outputFile)
+				out.print(result);
+			} catch(FileNotFoundException exc) {
+				System.err.println("An error occured when trying to write " + outputFile + ": " + exc.message)
+			} finally {
+				out?.close
+			}
 
-		out.close
+		} else {
+			println(result)
+		}
+	}
 
+	private static class FeatureXMLHandler extends DefaultHandler {
+		String featureName
+		Set<String> containedPlugins = new HashSet
+		Set<String> requiredFeatures = new HashSet
+
+		override startElement(String uri, String localName, String qName, org.xml.sax.Attributes attributes) throws SAXException {
+			if(qName.equals("feature"))
+				featureName = attributes.getValue("id")
+			else if(qName.equals("plugin"))
+				containedPlugins.add(attributes.getValue("id"))
+			else if(qName.equals("import")) {
+				requiredFeatures.add(attributes.getValue("feature"))
+			}
+
+		}
+	}
+
+	/**
+	 * From https://docs.oracle.com/javase/tutorial/essential/io/find.html
+	 */
+	private static class Finder extends SimpleFileVisitor<Path> {
+
+		private final PathMatcher manifestMatcher;
+		private final PathMatcher featureMatcher;
+
+		new() {
+			manifestMatcher = FileSystems.getDefault().getPathMatcher("glob:MANIFEST.MF");
+			featureMatcher = FileSystems.getDefault().getPathMatcher("glob:feature.xml");
+		}
+
+		Set<Path> manifestResults = new HashSet<Path>;
+		Set<Path> featureResults = new HashSet<Path>;
+
+		// Compares the glob pattern against
+		// the file or directory name.
+		def void find(Path file) {
+			val Path name = file.getFileName();
+			if(name != null) {
+				if(manifestMatcher.matches(name)) {
+					manifestResults.add(file);
+				} else if(featureMatcher.matches(name)) {
+					featureResults.add(file)
+				}
+			}
+		}
+
+		// Invoke the patternmatching
+		// method on each file.
+		@Override
+		public override FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
+			find(file);
+			return CONTINUE;
+		}
 	}
 
 }

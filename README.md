@@ -8,7 +8,6 @@ Generates a dot graph by reading all the OSGI `MANIFEST.MF` files and the Eclips
 
 ## TODOs
 
-- `pom.xml`
 - CLI interface
 - README with the options
 
