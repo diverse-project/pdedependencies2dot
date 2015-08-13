@@ -74,7 +74,7 @@ class Osgi2dot {
 		val boolean hasAllowedPrefixes = allowedPrefixes != null && !allowedPrefixes.isEmpty
 		val boolean hasFilteredPrefixes = filteredPrefixes != null && !filteredPrefixes.isEmpty
 		return (!hasAllowedPrefixes || allowedPrefixes.exists[p|n.startsWith(p)]) &&
-			(hasFilteredPrefixes && !filteredPrefixes.exists[p|n.startsWith(p)])
+			(!hasFilteredPrefixes || !filteredPrefixes.exists[p|n.startsWith(p)])
 	}
 
 	private def void addDep(String name, String dep) {
