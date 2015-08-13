@@ -2,7 +2,7 @@
 
 ## Description
 
-Generates a dot graph from a set of OSGI/Eclipse modules, by reading all the `MANIFEST.MF` files (and eventually also the `feature.xml` files)
+Generates a dot graph by reading all the OSGI `MANIFEST.MF` files and the Eclipse `feature.xml` files of a set of folders.
 
 ![Example](https://raw.githubusercontent.com/diverse-project/pdedependencies2dot/master/example.png)
 
