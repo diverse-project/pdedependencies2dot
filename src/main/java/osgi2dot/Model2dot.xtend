@@ -6,6 +6,8 @@ import java.io.PrintWriter
 import osgi2dot.model.PDEGraph
 import osgi2dot.model.Plugin
 import java.util.Random
+import osgi2dot.Main.Orientation
+import org.eclipse.xtend.lib.annotations.Accessors
 
 class Model2dot {
 
@@ -13,7 +15,12 @@ class Model2dot {
 
 	// Input
 	private val PDEGraph graph;
-	private boolean alwaysPrint;
+	
+	@Accessors(PUBLIC_SETTER,PRIVATE_GETTER)
+	boolean alwaysPrint;
+	
+	@Accessors(PUBLIC_SETTER,PRIVATE_GETTER)
+	Orientation orientation
 
 	public def void setOutputFile(File file) {
 		outputFile = file;
@@ -44,6 +51,11 @@ class Model2dot {
 digraph «graph.name» {
 	compound=true;
 	node [shape=box, color=black,style=filled,fillcolor="«pluginColor(graph.hue)»"];
+	«IF orientation.equals(Orientation.horizontal)»
+		rankdir=TB;
+	«ELSEIF orientation.equals(Orientation.vertical)»
+		rankdir=LR;
+	«ENDIF»
 	
 
 	«FOR feature : graph.features» 
@@ -115,8 +127,6 @@ digraph «graph.name» {
 		}
 	}
 
-	def void setAlwaysPrint(boolean b) {
-		this.alwaysPrint = b
-	}
+	
 
 }

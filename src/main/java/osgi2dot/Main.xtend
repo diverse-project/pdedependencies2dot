@@ -9,6 +9,10 @@ import org.kohsuke.args4j.CmdLineParser
 import org.kohsuke.args4j.Option
 
 public class Main {
+	enum Orientation {
+		horizontal,
+		vertical
+	}
 
 	@Option(name="--allowedPrefixes", usage="List of allowed prefixes. If given, a found plugin/feature is not taken into account if its id doesn't match one of these prefixes.", metaVar="STRING")
 	public List<String> allowedPrefixes;
@@ -22,6 +26,9 @@ public class Main {
 	@Option(name="--alwaysPrint", usage="If set, the output is printed even if an output fule is given.")
 	public Boolean alwaysPrint
 
+	@Option(name="--orientation", usage="Sets the overall shape of the graph.")
+	public Orientation orientation = Orientation.horizontal
+	
 	@Argument
 	public List<File> folders = new ArrayList<File>();
 
@@ -65,6 +72,9 @@ public class Main {
 			
 			if(alwaysPrint != null)
 				steptwo.alwaysPrint = alwaysPrint
+				
+					if(orientation != null)
+				steptwo.orientation = orientation
 				
 			// starting step two
 			steptwo.generate
