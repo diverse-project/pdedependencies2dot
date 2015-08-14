@@ -6,26 +6,26 @@
     usedGenPackages="../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore" operationReflection="true"
     importOrganizing="true">
   <foreignModel>pdegraph.ecore</foreignModel>
-  <genPackages prefix="Osgi2dot" disposableProviderFactory="true" ecorePackage="pdegraph.ecore#/">
-    <nestedGenPackages prefix="Model" disposableProviderFactory="true" ecorePackage="pdegraph.ecore#//model">
-      <genClasses ecoreClass="pdegraph.ecore#//model/PDEGraph">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pdegraph.ecore#//model/PDEGraph/features"/>
-      </genClasses>
-      <genClasses ecoreClass="pdegraph.ecore#//model/Plugin">
-        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference pdegraph.ecore#//model/Plugin/containingElement"/>
-      </genClasses>
-      <genClasses ecoreClass="pdegraph.ecore#//model/Feature">
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference pdegraph.ecore#//model/Feature/requiredFeatures"/>
-        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference pdegraph.ecore#//model/Feature/containingGraph"/>
-      </genClasses>
-      <genClasses ecoreClass="pdegraph.ecore#//model/PluginContainer">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pdegraph.ecore#//model/PluginContainer/plugins"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pdegraph.ecore#//model/PluginContainer/hue"/>
-      </genClasses>
-      <genClasses ecoreClass="pdegraph.ecore#//model/NamedElement">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pdegraph.ecore#//model/NamedElement/name"/>
-      </genClasses>
-    </nestedGenPackages>
+  <genPackages prefix="Model" basePackage="fr.inria.diverse.pdedependencies2dot" disposableProviderFactory="true"
+      ecorePackage="pdegraph.ecore#/">
+    <genClasses ecoreClass="pdegraph.ecore#//PDEGraph">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pdegraph.ecore#//PDEGraph/features"/>
+    </genClasses>
+    <genClasses ecoreClass="pdegraph.ecore#//Plugin">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference pdegraph.ecore#//Plugin/containingElement"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference pdegraph.ecore#//Plugin/dependencies"/>
+    </genClasses>
+    <genClasses ecoreClass="pdegraph.ecore#//Feature">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference pdegraph.ecore#//Feature/requiredFeatures"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference pdegraph.ecore#//Feature/containingGraph"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference pdegraph.ecore#//Feature/additionnalPlugins"/>
+    </genClasses>
+    <genClasses ecoreClass="pdegraph.ecore#//PluginContainer">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pdegraph.ecore#//PluginContainer/plugins"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pdegraph.ecore#//PluginContainer/hue"/>
+    </genClasses>
+    <genClasses ecoreClass="pdegraph.ecore#//NamedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pdegraph.ecore#//NamedElement/name"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

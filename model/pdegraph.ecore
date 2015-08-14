@@ -1,32 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="osgi2dot" nsURI="osgi2dot" nsPrefix="osgi2dot">
-  <eSubpackages name="model" nsURI="model" nsPrefix="model">
-    <eClassifiers xsi:type="ecore:EClass" name="PDEGraph" eSuperTypes="#//model/PluginContainer">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="features" ordered="false"
-          upperBound="-1" eType="#//model/Feature" containment="true" eOpposite="#//model/Feature/containingGraph"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Plugin" eSuperTypes="#//model/NamedElement">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="containingElement" eType="#//model/PluginContainer"
-          eOpposite="#//model/PluginContainer/plugins"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="dependencies" upperBound="-1"
-          eType="#//model/Plugin"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Feature" eSuperTypes="#//model/PluginContainer">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="requiredFeatures" upperBound="-1"
-          eType="#//model/Feature"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="containingGraph" eType="#//model/PDEGraph"
-          eOpposite="#//model/PDEGraph/features"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="additionnalPlugins" upperBound="-1"
-          eType="#//model/Plugin"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="PluginContainer" eSuperTypes="#//model/NamedElement">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="plugins" ordered="false"
-          upperBound="-1" eType="#//model/Plugin" containment="true" eOpposite="#//model/Plugin/containingElement"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="hue" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="NamedElement">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
-    </eClassifiers>
-  </eSubpackages>
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="pdedependencies2dot" nsPrefix="pdedependencies2dot">
+  <eClassifiers xsi:type="ecore:EClass" name="PDEGraph" eSuperTypes="#//PluginContainer">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="features" ordered="false"
+        upperBound="-1" eType="#//Feature" containment="true" eOpposite="#//Feature/containingGraph"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Plugin" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containingElement" eType="#//PluginContainer"
+        eOpposite="#//PluginContainer/plugins"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependencies" upperBound="-1"
+        eType="#//Plugin"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Feature" eSuperTypes="#//PluginContainer">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requiredFeatures" upperBound="-1"
+        eType="#//Feature"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containingGraph" eType="#//PDEGraph"
+        eOpposite="#//PDEGraph/features"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="additionnalPlugins" upperBound="-1"
+        eType="#//Plugin"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PluginContainer" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="plugins" ordered="false"
+        upperBound="-1" eType="#//Plugin" containment="true" eOpposite="#//Plugin/containingElement"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hue" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
 </ecore:EPackage>

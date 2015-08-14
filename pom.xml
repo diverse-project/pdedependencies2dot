@@ -59,7 +59,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>osgi2dot.Main</mainClass>
+							<mainClass>fr.inria.diverse.pdedependencies2dot.Main</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
@@ -84,7 +84,7 @@
 					<transformers>
 						<transformer
 							implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-							<mainClass>osgi2dot.Main</mainClass>
+							<mainClass>fr.inria.diverse.pdedependencies2dot.Main</mainClass>
 						</transformer>
 					</transformers>
 				</configuration>
