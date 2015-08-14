@@ -18,7 +18,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see fr.inria.diverse.pdedependencies2dot.model.ModelPackage#getPluginContainer()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface PluginContainer extends NamedElement {

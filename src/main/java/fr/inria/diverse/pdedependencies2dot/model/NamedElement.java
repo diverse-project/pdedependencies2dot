@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see fr.inria.diverse.pdedependencies2dot.model.ModelPackage#getNamedElement()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface NamedElement extends EObject {
@@ -32,7 +32,7 @@ public interface NamedElement extends EObject {
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see fr.inria.diverse.pdedependencies2dot.model.ModelPackage#getNamedElement_Name()
-	 * @model
+	 * @model id="true"
 	 * @generated
 	 */
 	String getName();

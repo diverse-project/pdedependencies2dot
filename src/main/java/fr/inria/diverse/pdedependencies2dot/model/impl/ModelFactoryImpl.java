@@ -59,8 +59,6 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.PDE_GRAPH: return createPDEGraph();
 			case ModelPackage.PLUGIN: return createPlugin();
 			case ModelPackage.FEATURE: return createFeature();
-			case ModelPackage.PLUGIN_CONTAINER: return createPluginContainer();
-			case ModelPackage.NAMED_ELEMENT: return createNamedElement();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -94,26 +92,6 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public Feature createFeature() {
 		FeatureImpl feature = new FeatureImpl();
 		return feature;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public PluginContainer createPluginContainer() {
-		PluginContainerImpl pluginContainer = new PluginContainerImpl();
-		return pluginContainer;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NamedElement createNamedElement() {
-		NamedElementImpl namedElement = new NamedElementImpl();
-		return namedElement;
 	}
 
 	/**

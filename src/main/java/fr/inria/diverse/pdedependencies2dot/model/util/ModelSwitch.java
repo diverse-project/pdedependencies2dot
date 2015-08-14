@@ -78,6 +78,7 @@ public class ModelSwitch<T> extends Switch<T> {
 				Plugin plugin = (Plugin)theEObject;
 				T result = casePlugin(plugin);
 				if (result == null) result = caseNamedElement(plugin);
+				if (result == null) result = caseProcesseable(plugin);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -85,6 +86,7 @@ public class ModelSwitch<T> extends Switch<T> {
 				Feature feature = (Feature)theEObject;
 				T result = caseFeature(feature);
 				if (result == null) result = casePluginContainer(feature);
+				if (result == null) result = caseProcesseable(feature);
 				if (result == null) result = caseNamedElement(feature);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -99,6 +101,12 @@ public class ModelSwitch<T> extends Switch<T> {
 			case ModelPackage.NAMED_ELEMENT: {
 				NamedElement namedElement = (NamedElement)theEObject;
 				T result = caseNamedElement(namedElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.PROCESSEABLE: {
+				Processeable processeable = (Processeable)theEObject;
+				T result = caseProcesseable(processeable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -178,6 +186,21 @@ public class ModelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseNamedElement(NamedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Processeable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Processeable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseProcesseable(Processeable object) {
 		return null;
 	}
 

@@ -22,7 +22,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Feature extends PluginContainer {
+public interface Feature extends PluginContainer, Processeable {
 	/**
 	 * Returns the value of the '<em><b>Required Features</b></em>' reference list.
 	 * The list contents are of type {@link fr.inria.diverse.pdedependencies2dot.model.Feature}.
@@ -34,7 +34,7 @@ public interface Feature extends PluginContainer {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Required Features</em>' reference list.
 	 * @see fr.inria.diverse.pdedependencies2dot.model.ModelPackage#getFeature_RequiredFeatures()
-	 * @model
+	 * @model ordered="false"
 	 * @generated
 	 */
 	EList<Feature> getRequiredFeatures();
@@ -78,7 +78,7 @@ public interface Feature extends PluginContainer {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Additionnal Plugins</em>' reference list.
 	 * @see fr.inria.diverse.pdedependencies2dot.model.ModelPackage#getFeature_AdditionnalPlugins()
-	 * @model
+	 * @model ordered="false"
 	 * @generated
 	 */
 	EList<Plugin> getAdditionnalPlugins();

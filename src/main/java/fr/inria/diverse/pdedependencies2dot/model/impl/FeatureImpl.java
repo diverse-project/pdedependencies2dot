@@ -7,6 +7,7 @@ import fr.inria.diverse.pdedependencies2dot.model.ModelPackage;
 import fr.inria.diverse.pdedependencies2dot.model.PDEGraph;
 import fr.inria.diverse.pdedependencies2dot.model.Plugin;
 
+import fr.inria.diverse.pdedependencies2dot.model.Processeable;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -29,6 +30,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.FeatureImpl#isProcessed <em>Processed</em>}</li>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.FeatureImpl#getRequiredFeatures <em>Required Features</em>}</li>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.FeatureImpl#getContainingGraph <em>Containing Graph</em>}</li>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.FeatureImpl#getAdditionnalPlugins <em>Additionnal Plugins</em>}</li>
@@ -38,6 +40,26 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * @generated
  */
 public class FeatureImpl extends PluginContainerImpl implements Feature {
+	/**
+	 * The default value of the '{@link #isProcessed() <em>Processed</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isProcessed()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean PROCESSED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isProcessed() <em>Processed</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isProcessed()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean processed = PROCESSED_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getRequiredFeatures() <em>Required Features</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -75,6 +97,27 @@ public class FeatureImpl extends PluginContainerImpl implements Feature {
 	@Override
 	protected EClass eStaticClass() {
 		return ModelPackage.Literals.FEATURE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isProcessed() {
+		return processed;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setProcessed(boolean newProcessed) {
+		boolean oldProcessed = processed;
+		processed = newProcessed;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.FEATURE__PROCESSED, oldProcessed, processed));
 	}
 
 	/**
@@ -194,6 +237,8 @@ public class FeatureImpl extends PluginContainerImpl implements Feature {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case ModelPackage.FEATURE__PROCESSED:
+				return isProcessed();
 			case ModelPackage.FEATURE__REQUIRED_FEATURES:
 				return getRequiredFeatures();
 			case ModelPackage.FEATURE__CONTAINING_GRAPH:
@@ -213,6 +258,9 @@ public class FeatureImpl extends PluginContainerImpl implements Feature {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case ModelPackage.FEATURE__PROCESSED:
+				setProcessed((Boolean)newValue);
+				return;
 			case ModelPackage.FEATURE__REQUIRED_FEATURES:
 				getRequiredFeatures().clear();
 				getRequiredFeatures().addAll((Collection<? extends Feature>)newValue);
@@ -236,6 +284,9 @@ public class FeatureImpl extends PluginContainerImpl implements Feature {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case ModelPackage.FEATURE__PROCESSED:
+				setProcessed(PROCESSED_EDEFAULT);
+				return;
 			case ModelPackage.FEATURE__REQUIRED_FEATURES:
 				getRequiredFeatures().clear();
 				return;
@@ -257,6 +308,8 @@ public class FeatureImpl extends PluginContainerImpl implements Feature {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case ModelPackage.FEATURE__PROCESSED:
+				return processed != PROCESSED_EDEFAULT;
 			case ModelPackage.FEATURE__REQUIRED_FEATURES:
 				return requiredFeatures != null && !requiredFeatures.isEmpty();
 			case ModelPackage.FEATURE__CONTAINING_GRAPH:
@@ -265,6 +318,54 @@ public class FeatureImpl extends PluginContainerImpl implements Feature {
 				return additionnalPlugins != null && !additionnalPlugins.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == Processeable.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.FEATURE__PROCESSED: return ModelPackage.PROCESSEABLE__PROCESSED;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == Processeable.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.PROCESSEABLE__PROCESSED: return ModelPackage.FEATURE__PROCESSED;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (processed: ");
+		result.append(processed);
+		result.append(')');
+		return result.toString();
 	}
 
 } //FeatureImpl

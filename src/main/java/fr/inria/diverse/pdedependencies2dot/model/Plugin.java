@@ -21,7 +21,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Plugin extends NamedElement {
+public interface Plugin extends NamedElement, Processeable {
 	/**
 	 * Returns the value of the '<em><b>Containing Element</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link fr.inria.diverse.pdedependencies2dot.model.PluginContainer#getPlugins <em>Plugins</em>}'.
@@ -61,7 +61,7 @@ public interface Plugin extends NamedElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Dependencies</em>' reference list.
 	 * @see fr.inria.diverse.pdedependencies2dot.model.ModelPackage#getPlugin_Dependencies()
-	 * @model
+	 * @model ordered="false"
 	 * @generated
 	 */
 	EList<Plugin> getDependencies();

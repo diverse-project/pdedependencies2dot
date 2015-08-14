@@ -35,7 +35,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class PluginContainerImpl extends NamedElementImpl implements PluginContainer {
+public abstract class PluginContainerImpl extends NamedElementImpl implements PluginContainer {
 	/**
 	 * The cached value of the '{@link #getPlugins() <em>Plugins</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
