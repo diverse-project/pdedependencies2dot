@@ -15,11 +15,11 @@ class Model2dot {
 
 	// Input
 	private val PDEGraph graph;
-	
-	@Accessors(PUBLIC_SETTER,PRIVATE_GETTER)
+
+	@Accessors(PUBLIC_SETTER, PRIVATE_GETTER)
 	boolean alwaysPrint;
-	
-	@Accessors(PUBLIC_SETTER,PRIVATE_GETTER)
+
+	@Accessors(PUBLIC_SETTER, PRIVATE_GETTER)
 	Orientation orientation
 
 	public def void setOutputFile(File file) {
@@ -72,8 +72,8 @@ digraph «graph.name» {
 		«IF feature.plugins.empty»
 		«val n = randomNodeName»
 		"«n»"[style=invis];
-		"«n»"«ELSE»"«feature.plugins.get(0).name»"«ENDIF»	-> "«req.name»" [ltail="«clusterName(
-			feature.name)»", style="setlinewidth(8)", color="«edgeColor(feature.hue)»"];
+		"«n»"«ELSE»"«feature.plugins.get(0).name»"«ENDIF»	-> "«req.name»" [ltail="«clusterName(feature.name)»", style="setlinewidth(8)", color="«edgeColor(
+			feature.hue)»"];
 		«ENDFOR»
 			
 		}
@@ -129,7 +129,5 @@ digraph «graph.name» {
 			println(result)
 		}
 	}
-
-	
 
 }

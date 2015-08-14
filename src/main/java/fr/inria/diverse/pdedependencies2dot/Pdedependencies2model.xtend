@@ -39,12 +39,11 @@ class Pdedependencies2model {
 	static val String REQUIRE_BUNDLE = "Require-Bundle"
 	static val ModelFactory factory = ModelFactory.eINSTANCE
 	private static Random random = new Random(12)
+
 	// Output 
 	@Accessors(PUBLIC_GETTER, PROTECTED_SETTER)
 	private val PDEGraph graph = factory.createPDEGraph
 
-	
-	
 	new(List<File> folders) {
 		this.folders.addAll(folders)
 		graph.name = "awesomeGraph"
@@ -99,7 +98,7 @@ class Pdedependencies2model {
 		}
 		return plugin
 	}
-	
+
 	private def Feature findFeatureOrCreate(String name) {
 		var feature = graph.eAllContents.filter(Feature).findFirst[f|f.name.equals(name)]
 		if(feature == null) {
@@ -165,7 +164,7 @@ class Pdedependencies2model {
 			}
 		} else {
 			val plugin = findPluginOrCreate(name)
-			if (plugin.containingElement == null)
+			if(plugin.containingElement == null)
 				graph.plugins.add(plugin)
 		}
 	}

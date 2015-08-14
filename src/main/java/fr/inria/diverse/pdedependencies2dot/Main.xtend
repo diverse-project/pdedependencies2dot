@@ -28,11 +28,9 @@ public class Main {
 
 	@Option(name="--orientation", usage="Sets the overall shape of the graph.")
 	public Orientation orientation = Orientation.horizontal
-	
+
 	@Argument
 	public List<File> folders = new ArrayList<File>();
-
-	
 
 	public def static void main(String[] args) {
 		new Main().doMain(args)
@@ -53,29 +51,28 @@ public class Main {
 
 			// setting args for step one
 			val stepone = new Pdedependencies2model(folders)
-			
+
 			// setting options
 			if(allowedPrefixes != null && !allowedPrefixes.isEmpty)
 				stepone.addAllowedPrefixes(allowedPrefixes)
 			if(filteredPrefixes != null && !filteredPrefixes.isEmpty)
 				stepone.addFilteredPrefixes(filteredPrefixes)
-			
 
 			// starting step one	
 			stepone.generate
-			
+
 			// setting parameter for step two
 			val steptwo = new Model2dot(stepone.graph)
-			
+
 			if(outputFile != null)
 				steptwo.outputFile = outputFile
-			
+
 			if(alwaysPrint != null)
 				steptwo.alwaysPrint = alwaysPrint
-				
-					if(orientation != null)
+
+			if(orientation != null)
 				steptwo.orientation = orientation
-				
+
 			// starting step two
 			steptwo.generate
 
