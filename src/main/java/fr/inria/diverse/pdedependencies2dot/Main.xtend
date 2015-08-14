@@ -29,9 +29,12 @@ public class Main {
 	@Option(name="--orientation", usage="Sets the overall shape of the graph.")
 	public Orientation orientation = Orientation.horizontal
 
-	@Option(name="--excludedFilePatterns", usage="List of glob patterns (e.g **/badfolder/**). If given, a found plugin/feature is not taken into account if its file path matches one of these patterns")
+	@Option(name="--excludedFilePatterns", usage="List of glob patterns (e.g **/badfolder/**). If given, a found plugin/feature is not taken into account if its file path matches one of these patterns", metaVar="STRING")
 	public List<String> excludedFilePatterns
 
+	@Option(name="--colorSeed", usage="Seed for the color randomizer. Each seed is a completely different color set.")
+	public int colorSeed = 12
+	
 	@Argument
 	public List<File> folders = new ArrayList<File>();
 
@@ -53,7 +56,7 @@ public class Main {
 				throw new CmdLineException(parser, "No folders given.");
 
 			// setting args for step one
-			val stepone = new Pdedependencies2model(folders)
+			val stepone = new Pdedependencies2model(folders, colorSeed)
 
 			// setting options
 			if(allowedPrefixes != null && !allowedPrefixes.isEmpty)

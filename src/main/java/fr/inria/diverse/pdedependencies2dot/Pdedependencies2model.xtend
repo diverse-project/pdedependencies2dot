@@ -30,6 +30,7 @@ class Pdedependencies2model {
 
 	// Mandatory inputs
 	private List<File> folders = new ArrayList<File>();
+	private int seed
 
 	// Optional inputs
 	private List<String> allowedPrefixes;
@@ -39,16 +40,20 @@ class Pdedependencies2model {
 	static val String BUNDLE_SYMBOLIC_NAME = "Bundle-SymbolicName"
 	static val String REQUIRE_BUNDLE = "Require-Bundle"
 	static val ModelFactory factory = ModelFactory.eINSTANCE
-	private static Random random = new Random(12)
+	private val Random random
+	
 
 	// Output 
 	@Accessors(PUBLIC_GETTER, PROTECTED_SETTER)
 	private val PDEGraph graph = factory.createPDEGraph
 
-	new(List<File> folders) {
+	new(List<File> folders, int colorSeed) {
 		this.folders.addAll(folders)
 		graph.name = "awesomeGraph"
+		random = new Random(colorSeed)
+		random.nextFloat
 		graph.hue = random.nextFloat
+		seed = colorSeed
 	}
 
 	public def void addAllowedPrefixes(String... prefixes) {
