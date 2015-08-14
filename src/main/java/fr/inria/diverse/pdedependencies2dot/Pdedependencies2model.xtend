@@ -215,11 +215,12 @@ class Pdedependencies2model {
 		new(List<String> excludeFilesPatterns) {
 			manifestMatcher = FileSystems.getDefault().getPathMatcher("glob:MANIFEST.MF");
 			featureMatcher = FileSystems.getDefault().getPathMatcher("glob:feature.xml");
-			
-			for (p : excludeFilesPatterns)
-				excludeFilesPatternMatcher.add(FileSystems.getDefault().getPathMatcher("glob:" + p))
-		}
 
+			if(excludeFilesPatterns != null) {
+				for (p : excludeFilesPatterns)
+					excludeFilesPatternMatcher.add(FileSystems.getDefault().getPathMatcher("glob:" + p))
+			}
+		}
 
 		Set<Path> manifestResults = new HashSet<Path>;
 		Set<Path> featureResults = new HashSet<Path>;
