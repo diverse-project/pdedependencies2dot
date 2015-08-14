@@ -19,8 +19,13 @@ public class Main {
 	@Option(name="--outputFile", usage="Path to the output file. If given, will write into this file instead of printing to the console.")
 	public File outputFile;
 
+	@Option(name="--alwaysPrint", usage="If set, the output is printed even if an output fule is given.")
+	public Boolean alwaysPrint
+
 	@Argument
 	public List<File> folders = new ArrayList<File>();
+
+	
 
 	public def static void main(String[] args) {
 		new Main().doMain(args)
@@ -39,19 +44,30 @@ public class Main {
 			if(folders.isEmpty())
 				throw new CmdLineException(parser, "No folders given.");
 
-			// setting args
-			val osgi2dot = new Osgi2dot(folders)
-
+			// setting args for step one
+			val stepone = new Pdedependencies2model(folders)
+			
 			// setting options
 			if(allowedPrefixes != null && !allowedPrefixes.isEmpty)
-				osgi2dot.addAllowedPrefixes(allowedPrefixes)
+				stepone.addAllowedPrefixes(allowedPrefixes)
 			if(filteredPrefixes != null && !filteredPrefixes.isEmpty)
-				osgi2dot.addFilteredPrefixes(filteredPrefixes)
-			if(outputFile != null)
-				osgi2dot.outputFile = outputFile
+				stepone.addFilteredPrefixes(filteredPrefixes)
+			
 
-			// starting program	
-			osgi2dot.generate
+			// starting step one	
+			stepone.generate
+			
+			// setting parameter for step two
+			val steptwo = new Model2dot(stepone.graph)
+			
+			if(outputFile != null)
+				steptwo.outputFile = outputFile
+			
+			if(alwaysPrint != null)
+				steptwo.alwaysPrint = alwaysPrint
+				
+			// starting step two
+			steptwo.generate
 
 		} catch(CmdLineException e) {
 
