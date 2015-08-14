@@ -41,7 +41,6 @@ class Pdedependencies2model {
 	static val String REQUIRE_BUNDLE = "Require-Bundle"
 	static val ModelFactory factory = ModelFactory.eINSTANCE
 	private val Random random
-	
 
 	// Output 
 	@Accessors(PUBLIC_GETTER, PROTECTED_SETTER)
@@ -74,12 +73,6 @@ class Pdedependencies2model {
 		this.excludedFilePatterns.addAll(pattenrs)
 	}
 
-	private def void addDep(String name, String dep) {
-		if(okPrefix(name) && okPrefix(dep)) {
-			findPluginOrCreate(name).dependencies.add(findPluginOrCreate(dep))
-		}
-	}
-
 	public def void generate() {
 
 		val Finder finder = new Finder(excludedFilePatterns);
@@ -107,6 +100,8 @@ class Pdedependencies2model {
 		if(plugin == null) {
 			plugin = factory.createPlugin
 			plugin.name = name
+			plugin.processed = false
+			plugin.containingElement = graph
 		}
 		return plugin
 	}
@@ -117,6 +112,8 @@ class Pdedependencies2model {
 			feature = factory.createFeature
 			feature.name = name
 			feature.hue = random.nextFloat
+			feature.processed = false
+			feature.containingGraph = graph
 		}
 		return feature
 	}
@@ -130,23 +127,22 @@ class Pdedependencies2model {
 		saxParser.parse(featurePath.toFile, handler)
 
 		if(okPrefix(handler.featureName)) {
-			val featureCluster = findFeatureOrCreate(handler.featureName)
-			featureCluster.containingGraph = graph
+			val feature = findFeatureOrCreate(handler.featureName)
+			feature.processed = true
 			for (p : handler.containedPlugins) {
 				if(okPrefix(p)) {
 					val plugin = findPluginOrCreate(p)
 					if(plugin.containingElement != null && plugin.containingElement instanceof Feature)
-						featureCluster.additionnalPlugins.add(plugin)
+						feature.additionnalPlugins.add(plugin)
 					else
-						featureCluster.plugins.add(plugin)
+						feature.plugins.add(plugin)
 				}
 			}
 
 			for (r : handler.requiredFeatures) {
 				if(okPrefix(r)) {
-					val feature = findFeatureOrCreate(r)
-					feature.containingGraph = graph
-					featureCluster.requiredFeatures.add(feature)
+					val reqfeature = findFeatureOrCreate(r)
+					feature.requiredFeatures.add(reqfeature)
 				}
 			}
 		}
@@ -168,16 +164,22 @@ class Pdedependencies2model {
 			(a as Attributes.Name).equals(new Attributes.Name(REQUIRE_BUNDLE))]
 
 		val name = parseManifestValue(attributes.get(bundleName) as String)
-		val allRequired = if(attributes.get(requireName) != null) attributes.get(requireName) as String else null
 
-		if(allRequired != null && !allRequired.equals("")) {
-			for (r : allRequired.split(",")) {
-				addDep(name, parseManifestValue(r))
-			}
-		} else {
+		if(okPrefix(name)) {
+
+			val allRequired = if(attributes.get(requireName) != null) attributes.get(requireName) as String else null
+
 			val plugin = findPluginOrCreate(name)
-			if(plugin.containingElement == null)
-				graph.plugins.add(plugin)
+			plugin.processed = true
+
+			if(allRequired != null && !allRequired.equals("")) {
+				for (r : allRequired.split(",")) {
+					val rname = parseManifestValue(r)
+					if(okPrefix(rname)) {
+						plugin.dependencies.add(findPluginOrCreate(rname))
+					}
+				}
+			}
 		}
 	}
 

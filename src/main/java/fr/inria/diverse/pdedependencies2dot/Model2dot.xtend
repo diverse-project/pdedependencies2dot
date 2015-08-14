@@ -8,6 +8,9 @@ import fr.inria.diverse.pdedependencies2dot.model.Plugin
 import java.util.Random
 import fr.inria.diverse.pdedependencies2dot.Main.Orientation
 import org.eclipse.xtend.lib.annotations.Accessors
+import fr.inria.diverse.pdedependencies2dot.model.Feature
+import java.util.Map
+import java.util.HashMap
 
 class Model2dot {
 
@@ -46,6 +49,20 @@ class Model2dot {
 		return hue + "," + 1.0 + "," + 0.5
 	}
 
+	val Map<Feature, String> fakePlugins = new HashMap
+
+	private def String getFeatureFirstPlugin(Feature f) {
+		if(!f.plugins.empty)
+			return f.plugins.get(0).name
+		else {
+			if(!fakePlugins.containsKey(f)) {
+				fakePlugins.put(f, randomNodeName)
+			}
+			return fakePlugins.get(f)
+		}
+
+	}
+
 	private def String generateDot() {
 		return '''
 digraph «graph.name» {
@@ -57,25 +74,36 @@ digraph «graph.name» {
 		rankdir=LR;
 	«ENDIF»
 	
+	«FOR plugin : graph.plugins»
+		"«plugin.name»"«IF !plugin.processed»[fillcolor=lightgray]«ENDIF»;
+	«ENDFOR»
 
 	«FOR feature : graph.features» 
 		subgraph "«clusterName(feature.name)»" {
 			node [shape=box, color=black,style=filled,fillcolor="«pluginColor(feature.hue)»"];
 			style=filled;
-			color="«featureColor(feature.hue)»";
+				
 			label="«feature.name»";
+			
+			«IF !feature.processed»
+			color=lightgray;	
+			«ELSE»
+			color="«featureColor(feature.hue)»";
+			«ENDIF»
+			
+			«IF feature.plugins.empty»
+			"«getFeatureFirstPlugin(feature)»"[style=invis];
+			«ENDIF»
+			
 			«FOR plugin : feature.plugins»
-			"«plugin.name»";
+			"«plugin.name»"«IF !plugin.processed»[color=lightgray]«ENDIF»;
 			«ENDFOR»
-			
-		«FOR req : feature.additionnalPlugins» 
-		«IF feature.plugins.empty»
-		«val n = randomNodeName»
-		"«n»"[style=invis];
-		"«n»"«ELSE»"«feature.plugins.get(0).name»"«ENDIF»	-> "«req.name»" [ltail="«clusterName(feature.name)»", style="dotted",penwidth=5, color="«edgeColor(
+				
+			«FOR req : feature.additionnalPlugins» 
+			"«getFeatureFirstPlugin(feature)»" -> "«req.name»" [ltail="«clusterName(feature.name)»", style="dotted",penwidth=5, color="«edgeColor(
 			feature.hue)»"];
-		«ENDFOR»
-			
+			«ENDFOR»
+				
 		}
 	«ENDFOR»
 	
@@ -85,20 +113,11 @@ digraph «graph.name» {
 		«ENDFOR» 
 	«ENDFOR»
 	
-	«FOR plugin : graph.plugins»
-		"«plugin.name»";
-	«ENDFOR»
-	
 	«FOR feature : graph.features»
 		«FOR req : feature.requiredFeatures»
-		«IF !feature.plugins.empty && !req.plugins.empty»
-		"«feature.plugins.get(0).name»"-> "«req.plugins.get(0).name»" [ltail="«clusterName(feature.name)»",lhead="«clusterName(
+		"«getFeatureFirstPlugin(feature)»"-> "«getFeatureFirstPlugin(req)»" [ltail="«clusterName(feature.name)»",lhead="«clusterName(
 			req.name)»", penwidth=5, color="«edgeColor(feature.hue)»"];
-		«ENDIF»
 		«ENDFOR»
-
-	
-		
 	«ENDFOR»
 }
 		'''
