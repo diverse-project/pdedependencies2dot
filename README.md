@@ -11,14 +11,23 @@ Generates a dot graph by reading all the OSGI `MANIFEST.MF` files and the Eclips
 ~~~~
 Usage: java -jar pdedependencies2dot-1.0-shaded.jar [options...] <folder1,folder2,...>
 
- --allowedPrefixes=STRING  : List of allowed prefixes. If given, a found
-                             plugin/feature is not taken into account if its id
-                             doesn't match one of these prefixes.
- --filteredPrefixes=STRING : List of forbidden prefixes. If given, a found
-                             plugin/feature is not taken into account if its id
-                             matches one of these prefixes.
- --outputFile=FILE         : Path to the output file. If given, will write into
-                             this file instead of printing to the console.
+ --allowedPrefixes=STRING              : List of allowed prefixes. If given, a
+                                         found plugin/feature is not taken into
+                                         account if its id doesn't match one of
+                                         these prefixes.
+ --alwaysPrint                         : If set, the output is printed even if
+                                         an output fule is given.
+ --filteredPrefixes=STRING             : List of forbidden prefixes. If given,
+                                         a found plugin/feature is not taken
+                                         into account if its id matches one of
+                                         these prefixes.
+ --orientation=[horizontal | vertical] : Sets the overall shape of the graph.
+                                         (default: horizontal)
+ --outputFile=FILE                     : Path to the output file. If given,
+                                         will write into this file instead of
+                                         printing to the console.
+
+
 ~~~~
 
 
@@ -38,9 +47,6 @@ To use it:
 $ java -jar target/pdedependencies2dot-1.0-shaded.jar --allowedPrefixes=org.company --filteredPrefixes=org.eclipse --outputFile=/tmp/mygraph.dot /my/development/folder
 ~~~
 
-## Restrictions
-
-In the current version, it won't work if some plugins are in multiple features.
 
 ## Future work
 
