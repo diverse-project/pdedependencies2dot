@@ -38,5 +38,9 @@ class DependencyGraph {
 		allPlugins.addAll(features.map[f|f.plugins].flatten)
 		return allPlugins
 	}
+	
+	def Set<PluginNode> getRootPlugins() {
+		return plugins.immutableCopy
+	}
 
 }

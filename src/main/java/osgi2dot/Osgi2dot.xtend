@@ -98,12 +98,16 @@ class Osgi2dot {
 			(a as Attributes.Name).equals(new Attributes.Name(REQUIRE_BUNDLE))]
 
 		val name = parseManifestValue(attributes.get(bundleName) as String)
-		val allRequired = attributes.get(requireName) as String
+		val allRequired = if (attributes.get(requireName) != null) attributes.get(requireName) as String else null
+		
+		
 
 		if(allRequired != null && !allRequired.equals("")) {
 			for (r : allRequired.split(",")) {
 				addDep(name, parseManifestValue(r))
 			}
+		} else {
+			graph.getPlugin(name) // will create the plugin in the graph
 		}
 	}
 
@@ -161,6 +165,9 @@ digraph awesomeGraph {
 		«ENDFOR» 
 	«ENDFOR»
 	
+	«FOR plugin : graph.rootPlugins»
+		"«plugin.name»";
+	«ENDFOR»
 	
 	«FOR featureCluster : graph.features»
 		«FOR req : featureCluster.requiredFeatures»
