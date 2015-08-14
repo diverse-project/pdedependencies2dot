@@ -40,7 +40,7 @@ $ java -jar target/pdedependencies2dot-1.0-shaded.jar --allowedPrefixes=org.comp
 
 ## Restrictions
 
-In the current version, it won't work if some plugin are in multiple features.
+In the current version, it won't work if some plugins are in multiple features.
 
 ## Future work
 
