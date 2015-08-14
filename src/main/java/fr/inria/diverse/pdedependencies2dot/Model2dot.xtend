@@ -67,6 +67,15 @@ digraph «graph.name» {
 			«FOR plugin : feature.plugins»
 			"«plugin.name»";
 			«ENDFOR»
+			
+				«FOR req : feature.additionnalPlugins» 
+		«IF feature.plugins.empty»
+		«val n = randomNodeName»
+		"«n»"[style=invis];
+		"«n»"«ELSE»"«feature.plugins.get(0).name»"«ENDIF»	-> "«req.name»" [ltail="«clusterName(
+			feature.name)»", style="setlinewidth(8)", color="«edgeColor(feature.hue)»"];
+		«ENDFOR»
+			
 		}
 	«ENDFOR»
 	
@@ -88,13 +97,7 @@ digraph «graph.name» {
 		«ENDIF»
 		«ENDFOR»
 
-		«FOR req : feature.additionnalPlugins» 
-		«IF feature.plugins.empty»
-		«val n = randomNodeName»
-		"«n»"[style=invis];
-		"«n»"«ELSE»"«feature.plugins.get(0).name»"«ENDIF»	-> "«req.name»" [ltail="«clusterName(
-			feature.name)»", style="setlinewidth(8)", color="«edgeColor(feature.hue)»"];
-		«ENDFOR»
+	
 		
 	«ENDFOR»
 }
