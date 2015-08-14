@@ -34,6 +34,7 @@ class Pdedependencies2model {
 	// Optional inputs
 	private List<String> allowedPrefixes;
 	private List<String> filteredPrefixes;
+	private List<String> excludedFilePatterns;
 
 	static val String BUNDLE_SYMBOLIC_NAME = "Bundle-SymbolicName"
 	static val String REQUIRE_BUNDLE = "Require-Bundle"
@@ -62,6 +63,12 @@ class Pdedependencies2model {
 		this.filteredPrefixes.addAll(prefixes)
 	}
 
+	public def void addExcludedFilePatterns(String... pattenrs) {
+		if(excludedFilePatterns == null)
+			this.excludedFilePatterns = new ArrayList
+		this.excludedFilePatterns.addAll(pattenrs)
+	}
+
 	private def void addDep(String name, String dep) {
 		if(okPrefix(name) && okPrefix(dep)) {
 			findPluginOrCreate(name).dependencies.add(findPluginOrCreate(dep))
@@ -70,7 +77,7 @@ class Pdedependencies2model {
 
 	public def void generate() {
 
-		val Finder finder = new Finder();
+		val Finder finder = new Finder(excludedFilePatterns);
 		for (p : folders)
 			Files.walkFileTree(p.toPath, finder);
 
@@ -203,11 +210,16 @@ class Pdedependencies2model {
 
 		private final PathMatcher manifestMatcher;
 		private final PathMatcher featureMatcher;
+		private final List<PathMatcher> excludeFilesPatternMatcher = new ArrayList;
 
-		new() {
+		new(List<String> excludeFilesPatterns) {
 			manifestMatcher = FileSystems.getDefault().getPathMatcher("glob:MANIFEST.MF");
 			featureMatcher = FileSystems.getDefault().getPathMatcher("glob:feature.xml");
+			
+			for (p : excludeFilesPatterns)
+				excludeFilesPatternMatcher.add(FileSystems.getDefault().getPathMatcher("glob:" + p))
 		}
+
 
 		Set<Path> manifestResults = new HashSet<Path>;
 		Set<Path> featureResults = new HashSet<Path>;
@@ -216,11 +228,13 @@ class Pdedependencies2model {
 		// the file or directory name.
 		def void find(Path file) {
 			val Path name = file.getFileName();
-			if(name != null) {
-				if(manifestMatcher.matches(name)) {
-					manifestResults.add(file);
-				} else if(featureMatcher.matches(name)) {
-					featureResults.add(file)
+			if(!excludeFilesPatternMatcher.exists[pm|pm.matches(file)]) {
+				if(name != null) {
+					if(manifestMatcher.matches(name)) {
+						manifestResults.add(file);
+					} else if(featureMatcher.matches(name)) {
+						featureResults.add(file)
+					}
 				}
 			}
 		}

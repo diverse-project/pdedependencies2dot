@@ -29,6 +29,9 @@ public class Main {
 	@Option(name="--orientation", usage="Sets the overall shape of the graph.")
 	public Orientation orientation = Orientation.horizontal
 
+	@Option(name="--excludedFilePatterns", usage="List of glob patterns (e.g **/badfolder/**). If given, a found plugin/feature is not taken into account if its file path matches one of these patterns")
+	public List<String> excludedFilePatterns
+
 	@Argument
 	public List<File> folders = new ArrayList<File>();
 
@@ -57,6 +60,8 @@ public class Main {
 				stepone.addAllowedPrefixes(allowedPrefixes)
 			if(filteredPrefixes != null && !filteredPrefixes.isEmpty)
 				stepone.addFilteredPrefixes(filteredPrefixes)
+			if(excludedFilePatterns != null)
+				stepone.addExcludedFilePatterns(excludedFilePatterns)
 
 			// starting step one	
 			stepone.generate
