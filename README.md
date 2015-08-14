@@ -11,12 +11,21 @@ Generates a dot graph by reading all the OSGI `MANIFEST.MF` files and the Eclips
 ~~~~
 Usage: java -jar pdedependencies2dot-1.0-shaded.jar [options...] <folder1,folder2,...>
 
+
  --allowedPrefixes=STRING              : List of allowed prefixes. If given, a
                                          found plugin/feature is not taken into
                                          account if its id doesn't match one of
                                          these prefixes.
  --alwaysPrint                         : If set, the output is printed even if
                                          an output fule is given.
+ --colorSeed=N                         : Seed for the color randomizer. Each
+                                         seed is a completely different color
+                                         set. (default: 12)
+ --excludedFilePatterns=STRING         : List of glob patterns (e.g
+                                         **/badfolder/**). If given, a found
+                                         plugin/feature is not taken into
+                                         account if its file path matches one
+                                         of these patterns
  --filteredPrefixes=STRING             : List of forbidden prefixes. If given,
                                          a found plugin/feature is not taken
                                          into account if its id matches one of
@@ -26,8 +35,6 @@ Usage: java -jar pdedependencies2dot-1.0-shaded.jar [options...] <folder1,folder
  --outputFile=FILE                     : Path to the output file. If given,
                                          will write into this file instead of
                                          printing to the console.
-
-
 ~~~~
 
 
