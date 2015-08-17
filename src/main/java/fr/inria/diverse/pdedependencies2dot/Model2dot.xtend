@@ -11,6 +11,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import fr.inria.diverse.pdedependencies2dot.model.Feature
 import java.util.Map
 import java.util.HashMap
+import fr.inria.diverse.pdedependencies2dot.model.Processeable
 
 class Model2dot {
 
@@ -24,6 +25,9 @@ class Model2dot {
 
 	@Accessors(PUBLIC_SETTER, PRIVATE_GETTER)
 	Orientation orientation
+
+	@Accessors(PUBLIC_SETTER, PRIVATE_GETTER)
+	boolean hideExternal
 
 	public def void setOutputFile(File file) {
 		outputFile = file;
@@ -63,6 +67,10 @@ class Model2dot {
 
 	}
 
+	private def boolean shouldDisplay(Processeable p) {
+		return (!hideExternal || (p.processed))
+	}
+
 	private def String generateDot() {
 		return '''
 digraph «graph.name» {
@@ -74,11 +82,11 @@ digraph «graph.name» {
 		rankdir=LR;
 	«ENDIF»
 	
-	«FOR plugin : graph.plugins»
+	«FOR plugin : graph.plugins.filter[p|p.shouldDisplay]»
 		"«plugin.name»"«IF !plugin.processed»[fillcolor=lightgray]«ENDIF»;
 	«ENDFOR»
-
-	«FOR feature : graph.features» 
+	
+	«FOR feature : graph.features.filter[p|p.shouldDisplay]» 
 		subgraph "«clusterName(feature.name)»" {
 			node [shape=box, color=black,style=filled,fillcolor="«pluginColor(feature.hue)»"];
 			style=filled;
@@ -95,11 +103,13 @@ digraph «graph.name» {
 			"«getFeatureFirstPlugin(feature)»"[style=invis];
 			«ENDIF»
 			
-			«FOR plugin : feature.plugins»
+
+			«FOR plugin : feature.plugins.filter[p|p.shouldDisplay]»
 			"«plugin.name»"«IF !plugin.processed»[color=lightgray]«ENDIF»;
 			«ENDFOR»
+
 				
-			«FOR req : feature.additionnalPlugins» 
+			«FOR req : feature.additionnalPlugins.filter[p|p.shouldDisplay]» 
 			"«getFeatureFirstPlugin(feature)»" -> "«req.name»" [ltail="«clusterName(feature.name)»", style="dotted",penwidth=5, color="«edgeColor(
 			feature.hue)»"];
 			«ENDFOR»
@@ -107,14 +117,14 @@ digraph «graph.name» {
 		}
 	«ENDFOR»
 	
-	«FOR Plugin plugin : graph.eAllContents.filter(Plugin).toSet»
-		«FOR dep : plugin.dependencies»
+	«FOR Plugin plugin : graph.eAllContents.filter(Plugin).toSet.filter[p|p.shouldDisplay]»
+		«FOR dep : plugin.dependencies.filter[p|p.shouldDisplay]»
 			"«plugin.name»" -> "«dep.name»" [color="«edgeColor(plugin.containingElement.hue)»"];
 		«ENDFOR» 
 	«ENDFOR»
 	
-	«FOR feature : graph.features»
-		«FOR req : feature.requiredFeatures»
+	«FOR feature : graph.features.filter[p|p.shouldDisplay]»
+		«FOR req : feature.requiredFeatures.filter[p|p.shouldDisplay]»
 		"«getFeatureFirstPlugin(feature)»"-> "«getFeatureFirstPlugin(req)»" [ltail="«clusterName(feature.name)»",lhead="«clusterName(
 			req.name)»", penwidth=5, color="«edgeColor(feature.hue)»"];
 		«ENDFOR»
@@ -123,7 +133,7 @@ digraph «graph.name» {
 		'''
 	}
 
-	def String randomNodeName() {
+	private def String randomNodeName() {
 		return Math.abs(new Random().nextInt()).toString
 	}
 

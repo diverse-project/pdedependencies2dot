@@ -23,7 +23,7 @@ public class Main {
 	@Option(name="--outputFile", usage="Path to the output file. If given, will write into this file instead of printing to the console.")
 	public File outputFile;
 
-	@Option(name="--alwaysPrint", usage="If set, the output is printed even if an output fule is given.")
+	@Option(name="--alwaysPrint", usage="If set, the output is printed even if an output file is given.")
 	public Boolean alwaysPrint
 
 	@Option(name="--orientation", usage="Sets the overall shape of the graph.")
@@ -34,6 +34,9 @@ public class Main {
 
 	@Option(name="--colorSeed", usage="Seed for the color randomizer. Each seed is a completely different color set.")
 	public int colorSeed = 12
+	
+	@Option(name="--hideExternal", usage="If set, external dependencies/references for which no MANIFEST.MF/plugin.xml was found are not displayed.")
+	public Boolean hideExternal;
 	
 	@Argument
 	public List<File> folders = new ArrayList<File>();
@@ -80,6 +83,9 @@ public class Main {
 
 			if(orientation != null)
 				steptwo.orientation = orientation
+				
+			if (hideExternal != null)
+				steptwo.hideExternal = true
 
 			// starting step two
 			steptwo.generate
