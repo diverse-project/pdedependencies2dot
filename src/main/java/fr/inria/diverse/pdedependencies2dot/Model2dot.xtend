@@ -105,7 +105,7 @@ digraph «graph.name» {
 			
 
 			«FOR plugin : feature.plugins.filter[p|p.shouldDisplay]»
-			"«plugin.name»"«IF !plugin.processed»[color=lightgray]«ENDIF»;
+			"«plugin.name»"«IF !plugin.processed»[fillcolor=lightgray]«ENDIF»;
 			«ENDFOR»
 
 				
