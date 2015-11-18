@@ -2,7 +2,7 @@
 
 ## Description
 
-Generates a dot graph by reading all the OSGI `MANIFEST.MF` files and the Eclipse `feature.xml` files of a set of folders.
+Given a folder full of Eclipse plugins projects and features projects, generates a dot dependency graph by reading all the OSGI `MANIFEST.MF` files and the Eclipse `feature.xml` files of a set of folders.
 
 ![Example](https://raw.githubusercontent.com/diverse-project/pdedependencies2dot/master/example.png)
 
