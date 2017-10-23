@@ -1,6 +1,7 @@
 package fr.inria.diverse.pdedependencies2dot;
 
 import java.io.File
+import java.nio.file.Paths
 import java.util.ArrayList
 import java.util.List
 import org.kohsuke.args4j.Argument
@@ -34,11 +35,12 @@ public class Main {
 
 	@Option(name="--colorSeed", usage="Seed for the color randomizer. Each seed is a completely different color set.")
 	public int colorSeed = 12
-	
+
 	@Option(name="--hideExternal", usage="If set, external dependencies/references for which no MANIFEST.MF/plugin.xml was found are not displayed.")
 	public Boolean hideExternal;
-	
-	@Argument(required=true, usage="List of folders recursively containing plugins and features.", metaVar="folder1,folder2,...")
+
+	private static val String foldersDisplayedString = "folder1,folder2,..."
+	@Argument(required=true, usage="List of folders recursively containing plugins and features.", metaVar=foldersDisplayedString)
 	public List<File> folders = new ArrayList<File>();
 
 	public def static void main(String[] args) {
@@ -58,11 +60,11 @@ public class Main {
 			val stepone = new Pdedependencies2model(folders, colorSeed)
 
 			// setting options
-			if(allowedPrefixes !== null && !allowedPrefixes.isEmpty)
+			if (allowedPrefixes !== null && !allowedPrefixes.isEmpty)
 				stepone.addAllowedPrefixes(allowedPrefixes)
-			if(filteredPrefixes !== null && !filteredPrefixes.isEmpty)
+			if (filteredPrefixes !== null && !filteredPrefixes.isEmpty)
 				stepone.addFilteredPrefixes(filteredPrefixes)
-			if(excludedFilePatterns !== null)
+			if (excludedFilePatterns !== null)
 				stepone.addExcludedFilePatterns(excludedFilePatterns)
 
 			// starting step one	
@@ -71,25 +73,33 @@ public class Main {
 			// setting parameter for step two
 			val steptwo = new Model2dot(stepone.graph)
 
-			if(outputFile !== null)
+			if (outputFile !== null)
 				steptwo.outputFile = outputFile
 
-			if(alwaysPrint !== null)
+			if (alwaysPrint !== null)
 				steptwo.alwaysPrint = alwaysPrint
 
-			if(orientation !== null)
+			if (orientation !== null)
 				steptwo.orientation = orientation
-				
+
 			if (hideExternal !== null)
 				steptwo.hideExternal = true
 
 			// starting step two
 			steptwo.generate
 
-		} catch(CmdLineException e) {
+		} catch (CmdLineException e) {
+
+			val potentialJar = Paths.get(Main.getProtectionDomain().getCodeSource().getLocation().getPath())
+			val jarName = if (potentialJar.toString.endsWith("jar")) {
+					val currentDir = Paths.get(".").toAbsolutePath.parent
+					currentDir.relativize(potentialJar)
+				} else {
+					"pdedependencies2dot.jar"
+				}
 
 			System.err.println(e.getMessage());
-			System.err.println("Usage: java -jar pdedependencies2dot.jar [options...] <folder1,folder2,...>");
+			System.err.println('''Usage: java -jar «jarName» [options...] «foldersDisplayedString»''');
 			System.err.println()
 			System.err.println("Arguments and options:")
 			parser.printUsage(System.err)
