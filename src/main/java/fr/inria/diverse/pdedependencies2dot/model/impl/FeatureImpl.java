@@ -6,8 +6,8 @@ import fr.inria.diverse.pdedependencies2dot.model.Feature;
 import fr.inria.diverse.pdedependencies2dot.model.ModelPackage;
 import fr.inria.diverse.pdedependencies2dot.model.PDEGraph;
 import fr.inria.diverse.pdedependencies2dot.model.Plugin;
-
 import fr.inria.diverse.pdedependencies2dot.model.Processeable;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;

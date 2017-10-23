@@ -376,7 +376,6 @@ public interface ModelPackage extends EPackage {
 	 */
 	int FEATURE_OPERATION_COUNT = PLUGIN_CONTAINER_OPERATION_COUNT + 0;
 
-
 	/**
 	 * The meta object id for the '{@link fr.inria.diverse.pdedependencies2dot.model.impl.ProcesseableImpl <em>Processeable</em>}' class.
 	 * <!-- begin-user-doc -->

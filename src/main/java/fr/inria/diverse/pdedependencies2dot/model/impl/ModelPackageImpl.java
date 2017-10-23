@@ -9,8 +9,8 @@ import fr.inria.diverse.pdedependencies2dot.model.NamedElement;
 import fr.inria.diverse.pdedependencies2dot.model.PDEGraph;
 import fr.inria.diverse.pdedependencies2dot.model.Plugin;
 import fr.inria.diverse.pdedependencies2dot.model.PluginContainer;
-
 import fr.inria.diverse.pdedependencies2dot.model.Processeable;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;

@@ -5,8 +5,8 @@ package fr.inria.diverse.pdedependencies2dot.model.impl;
 import fr.inria.diverse.pdedependencies2dot.model.ModelPackage;
 import fr.inria.diverse.pdedependencies2dot.model.Plugin;
 import fr.inria.diverse.pdedependencies2dot.model.PluginContainer;
-
 import fr.inria.diverse.pdedependencies2dot.model.Processeable;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -47,6 +47,7 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 	 * @ordered
 	 */
 	protected static final boolean PROCESSED_EDEFAULT = false;
+
 	/**
 	 * The cached value of the '{@link #isProcessed() <em>Processed</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -56,6 +57,7 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 	 * @ordered
 	 */
 	protected boolean processed = PROCESSED_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getDependencies() <em>Dependencies</em>}' reference list.
 	 * <!-- begin-user-doc -->
