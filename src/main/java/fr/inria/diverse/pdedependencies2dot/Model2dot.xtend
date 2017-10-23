@@ -159,7 +159,7 @@ digraph «graph.name» {
 
 		}
 
-		if(outputFile == null || alwaysPrint) {
+		if(outputFile === null || alwaysPrint) {
 			println(result)
 		}
 	}

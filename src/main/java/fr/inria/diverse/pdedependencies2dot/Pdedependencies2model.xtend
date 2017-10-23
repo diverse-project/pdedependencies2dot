@@ -98,7 +98,7 @@ class Pdedependencies2model {
 
 	private def Plugin findPluginOrCreate(String name) {
 		var plugin = graph.eAllContents.filter(Plugin).findFirst[p|p.name.equals(name)]
-		if(plugin == null) {
+		if(plugin === null) {
 			plugin = factory.createPlugin
 			plugin.name = name
 			plugin.processed = false
@@ -109,7 +109,7 @@ class Pdedependencies2model {
 
 	private def Feature findFeatureOrCreate(String name) {
 		var feature = graph.eAllContents.filter(Feature).findFirst[f|f.name.equals(name)]
-		if(feature == null) {
+		if(feature === null) {
 			feature = factory.createFeature
 			feature.name = name
 			feature.hue = random.nextFloat
@@ -264,7 +264,6 @@ class Pdedependencies2model {
 
 		// Invoke the patternmatching
 		// method on each file.
-		@Override
 		public override FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
 			find(file);
 			return FileVisitResult.CONTINUE;
