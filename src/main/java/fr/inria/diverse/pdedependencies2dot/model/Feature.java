@@ -11,12 +11,13 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.Feature#getRequiredFeatures <em>Required Features</em>}</li>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.Feature#getContainingGraph <em>Containing Graph</em>}</li>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.Feature#getAdditionnalPlugins <em>Additionnal Plugins</em>}</li>
+ *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.Feature#getRequiredPlugins <em>Required Plugins</em>}</li>
  * </ul>
- * </p>
  *
  * @see fr.inria.diverse.pdedependencies2dot.model.ModelPackage#getFeature()
  * @model
@@ -82,5 +83,21 @@ public interface Feature extends PluginContainer, Processeable {
 	 * @generated
 	 */
 	EList<Plugin> getAdditionnalPlugins();
+
+	/**
+	 * Returns the value of the '<em><b>Required Plugins</b></em>' reference list.
+	 * The list contents are of type {@link fr.inria.diverse.pdedependencies2dot.model.Plugin}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Required Plugins</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Required Plugins</em>' reference list.
+	 * @see fr.inria.diverse.pdedependencies2dot.model.ModelPackage#getFeature_RequiredPlugins()
+	 * @model
+	 * @generated
+	 */
+	EList<Plugin> getRequiredPlugins();
 
 } // Feature

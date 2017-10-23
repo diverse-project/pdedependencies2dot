@@ -28,12 +28,12 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PluginImpl#isProcessed <em>Processed</em>}</li>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PluginImpl#getContainingElement <em>Containing Element</em>}</li>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PluginImpl#getDependencies <em>Dependencies</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

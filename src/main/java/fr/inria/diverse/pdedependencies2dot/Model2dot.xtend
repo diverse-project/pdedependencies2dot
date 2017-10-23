@@ -113,6 +113,11 @@ digraph «graph.name» {
 			"«getFeatureFirstPlugin(feature)»" -> "«req.name»" [ltail="«clusterName(feature.name)»", style="dotted",penwidth=5, color="«edgeColor(
 			feature.hue)»"];
 			«ENDFOR»
+			
+			«FOR req : feature.requiredPlugins.filter[p|p.shouldDisplay]» 
+			"«getFeatureFirstPlugin(feature)»" -> "«req.name»" [ltail="«clusterName(feature.name)»", style="dotted",penwidth=5, color="«edgeColor(
+			feature.hue)»"];
+			«ENDFOR»
 				
 		}
 	«ENDFOR»

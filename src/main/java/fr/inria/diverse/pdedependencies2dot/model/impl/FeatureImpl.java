@@ -29,13 +29,14 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.FeatureImpl#isProcessed <em>Processed</em>}</li>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.FeatureImpl#getRequiredFeatures <em>Required Features</em>}</li>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.FeatureImpl#getContainingGraph <em>Containing Graph</em>}</li>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.FeatureImpl#getAdditionnalPlugins <em>Additionnal Plugins</em>}</li>
+ *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.FeatureImpl#getRequiredPlugins <em>Required Plugins</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -79,6 +80,16 @@ public class FeatureImpl extends PluginContainerImpl implements Feature {
 	 * @ordered
 	 */
 	protected EList<Plugin> additionnalPlugins;
+
+	/**
+	 * The cached value of the '{@link #getRequiredPlugins() <em>Required Plugins</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRequiredPlugins()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Plugin> requiredPlugins;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -190,6 +201,18 @@ public class FeatureImpl extends PluginContainerImpl implements Feature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Plugin> getRequiredPlugins() {
+		if (requiredPlugins == null) {
+			requiredPlugins = new EObjectResolvingEList<Plugin>(Plugin.class, this, ModelPackage.FEATURE__REQUIRED_PLUGINS);
+		}
+		return requiredPlugins;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -245,6 +268,8 @@ public class FeatureImpl extends PluginContainerImpl implements Feature {
 				return getContainingGraph();
 			case ModelPackage.FEATURE__ADDITIONNAL_PLUGINS:
 				return getAdditionnalPlugins();
+			case ModelPackage.FEATURE__REQUIRED_PLUGINS:
+				return getRequiredPlugins();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -272,6 +297,10 @@ public class FeatureImpl extends PluginContainerImpl implements Feature {
 				getAdditionnalPlugins().clear();
 				getAdditionnalPlugins().addAll((Collection<? extends Plugin>)newValue);
 				return;
+			case ModelPackage.FEATURE__REQUIRED_PLUGINS:
+				getRequiredPlugins().clear();
+				getRequiredPlugins().addAll((Collection<? extends Plugin>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -296,6 +325,9 @@ public class FeatureImpl extends PluginContainerImpl implements Feature {
 			case ModelPackage.FEATURE__ADDITIONNAL_PLUGINS:
 				getAdditionnalPlugins().clear();
 				return;
+			case ModelPackage.FEATURE__REQUIRED_PLUGINS:
+				getRequiredPlugins().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -316,6 +348,8 @@ public class FeatureImpl extends PluginContainerImpl implements Feature {
 				return getContainingGraph() != null;
 			case ModelPackage.FEATURE__ADDITIONNAL_PLUGINS:
 				return additionnalPlugins != null && !additionnalPlugins.isEmpty();
+			case ModelPackage.FEATURE__REQUIRED_PLUGINS:
+				return requiredPlugins != null && !requiredPlugins.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

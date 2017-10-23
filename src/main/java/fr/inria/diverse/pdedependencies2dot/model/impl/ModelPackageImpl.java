@@ -218,6 +218,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getFeature_RequiredPlugins() {
+		return (EReference)featureEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPluginContainer() {
 		return pluginContainerEClass;
 	}
@@ -315,6 +324,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(featureEClass, FEATURE__REQUIRED_FEATURES);
 		createEReference(featureEClass, FEATURE__CONTAINING_GRAPH);
 		createEReference(featureEClass, FEATURE__ADDITIONNAL_PLUGINS);
+		createEReference(featureEClass, FEATURE__REQUIRED_PLUGINS);
 
 		pluginContainerEClass = createEClass(PLUGIN_CONTAINER);
 		createEReference(pluginContainerEClass, PLUGIN_CONTAINER__PLUGINS);
@@ -377,6 +387,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getFeature_RequiredFeatures(), this.getFeature(), null, "requiredFeatures", null, 0, -1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getFeature_ContainingGraph(), this.getPDEGraph(), this.getPDEGraph_Features(), "containingGraph", null, 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFeature_AdditionnalPlugins(), this.getPlugin(), null, "additionnalPlugins", null, 0, -1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getFeature_RequiredPlugins(), this.getPlugin(), null, "requiredPlugins", null, 0, -1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(pluginContainerEClass, PluginContainer.class, "PluginContainer", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPluginContainer_Plugins(), this.getPlugin(), this.getPlugin_ContainingElement(), "plugins", null, 0, -1, PluginContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);

@@ -18,6 +18,8 @@
         eOpposite="#//PDEGraph/features"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="additionnalPlugins" ordered="false"
         upperBound="-1" eType="#//Plugin"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requiredPlugins" upperBound="-1"
+        eType="#//Plugin"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PluginContainer" abstract="true" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="plugins" ordered="false"

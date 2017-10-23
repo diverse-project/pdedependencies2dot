@@ -11,10 +11,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.Processeable#isProcessed <em>Processed</em>}</li>
  * </ul>
- * </p>
  *
  * @see fr.inria.diverse.pdedependencies2dot.model.ModelPackage#getProcesseable()
  * @model abstract="true"

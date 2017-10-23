@@ -11,10 +11,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.NamedElement#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see fr.inria.diverse.pdedependencies2dot.model.ModelPackage#getNamedElement()
  * @model abstract="true"

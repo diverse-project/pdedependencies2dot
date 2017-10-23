@@ -11,10 +11,10 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.PDEGraph#getFeatures <em>Features</em>}</li>
  * </ul>
- * </p>
  *
  * @see fr.inria.diverse.pdedependencies2dot.model.ModelPackage#getPDEGraph()
  * @model

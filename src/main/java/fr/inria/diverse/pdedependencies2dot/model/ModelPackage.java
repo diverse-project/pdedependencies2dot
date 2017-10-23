@@ -350,13 +350,22 @@ public interface ModelPackage extends EPackage {
 	int FEATURE__ADDITIONNAL_PLUGINS = PLUGIN_CONTAINER_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Required Plugins</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE__REQUIRED_PLUGINS = PLUGIN_CONTAINER_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Feature</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FEATURE_FEATURE_COUNT = PLUGIN_CONTAINER_FEATURE_COUNT + 4;
+	int FEATURE_FEATURE_COUNT = PLUGIN_CONTAINER_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of operations of the '<em>Feature</em>' class.
@@ -501,6 +510,17 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getFeature_AdditionnalPlugins();
+
+	/**
+	 * Returns the meta object for the reference list '{@link fr.inria.diverse.pdedependencies2dot.model.Feature#getRequiredPlugins <em>Required Plugins</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Required Plugins</em>'.
+	 * @see fr.inria.diverse.pdedependencies2dot.model.Feature#getRequiredPlugins()
+	 * @see #getFeature()
+	 * @generated
+	 */
+	EReference getFeature_RequiredPlugins();
 
 	/**
 	 * Returns the meta object for class '{@link fr.inria.diverse.pdedependencies2dot.model.PluginContainer <em>Plugin Container</em>}'.
@@ -676,6 +696,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference FEATURE__ADDITIONNAL_PLUGINS = eINSTANCE.getFeature_AdditionnalPlugins();
+
+		/**
+		 * The meta object literal for the '<em><b>Required Plugins</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FEATURE__REQUIRED_PLUGINS = eINSTANCE.getFeature_RequiredPlugins();
 
 		/**
 		 * The meta object literal for the '{@link fr.inria.diverse.pdedependencies2dot.model.impl.PluginContainerImpl <em>Plugin Container</em>}' class.

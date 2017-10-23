@@ -53,23 +53,20 @@ class Pdedependencies2model {
 		random.nextFloat
 		graph.hue = random.nextFloat
 		seed = colorSeed
+		allowedPrefixes = new ArrayList
+		filteredPrefixes = new ArrayList
+		excludedFilePatterns = new ArrayList
 	}
 
 	public def void addAllowedPrefixes(String... prefixes) {
-		if(allowedPrefixes == null)
-			this.allowedPrefixes = new ArrayList
 		this.allowedPrefixes.addAll(prefixes)
 	}
 
 	public def void addFilteredPrefixes(String... prefixes) {
-		if(filteredPrefixes == null)
-			this.filteredPrefixes = new ArrayList
 		this.filteredPrefixes.addAll(prefixes)
 	}
 
 	public def void addExcludedFilePatterns(String... pattenrs) {
-		if(excludedFilePatterns == null)
-			this.excludedFilePatterns = new ArrayList
 		this.excludedFilePatterns.addAll(pattenrs)
 	}
 
@@ -89,10 +86,14 @@ class Pdedependencies2model {
 	}
 
 	private def boolean okPrefix(String n) {
-		val boolean hasAllowedPrefixes = allowedPrefixes != null && !allowedPrefixes.isEmpty
-		val boolean hasFilteredPrefixes = filteredPrefixes != null && !filteredPrefixes.isEmpty
-		return (!hasAllowedPrefixes || allowedPrefixes.exists[p|n.startsWith(p)]) &&
-			(!hasFilteredPrefixes || !filteredPrefixes.exists[p|n.startsWith(p)])
+		val boolean hasAllowedPrefixes = allowedPrefixes !== null && !allowedPrefixes.isEmpty
+		val boolean hasFilteredPrefixes = filteredPrefixes !== null && !filteredPrefixes.isEmpty
+		return (!hasAllowedPrefixes || allowedPrefixes.exists[p|
+			n.startsWith(p)
+		]) &&
+			(!hasFilteredPrefixes || !filteredPrefixes.exists[p|
+				n.startsWith(p)
+			])
 	}
 
 	private def Plugin findPluginOrCreate(String name) {
@@ -143,6 +144,13 @@ class Pdedependencies2model {
 				if(okPrefix(r)) {
 					val reqfeature = findFeatureOrCreate(r)
 					feature.requiredFeatures.add(reqfeature)
+				}
+			}
+			
+			for (rp : handler.requiredPlugins) {
+				if(okPrefix(rp)) {
+					val reqplugin = findPluginOrCreate(rp)
+					feature.requiredPlugins.add(reqplugin)
 				}
 			}
 		}
@@ -197,6 +205,7 @@ class Pdedependencies2model {
 		String featureName
 		Set<String> containedPlugins = new HashSet
 		Set<String> requiredFeatures = new HashSet
+		Set<String> requiredPlugins = new HashSet
 
 		override startElement(String uri, String localName, String qName, org.xml.sax.Attributes attributes) throws SAXException {
 			if(qName.equals("feature"))
@@ -204,7 +213,13 @@ class Pdedependencies2model {
 			else if(qName.equals("plugin"))
 				containedPlugins.add(attributes.getValue("id"))
 			else if(qName.equals("import")) {
-				requiredFeatures.add(attributes.getValue("feature"))
+				val featureName = attributes.getValue("feature")
+				if (featureName !== null)
+					requiredFeatures.add(featureName)
+				else {
+					val pluginName = attributes.getValue("plugin")
+					requiredPlugins.add(pluginName)
+				}
 			}
 
 		}
