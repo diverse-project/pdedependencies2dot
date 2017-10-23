@@ -38,7 +38,7 @@ public class Main {
 	@Option(name="--hideExternal", usage="If set, external dependencies/references for which no MANIFEST.MF/plugin.xml was found are not displayed.")
 	public Boolean hideExternal;
 	
-	@Argument
+	@Argument(required=true, usage="List of folders recursively containing plugins and features.", metaVar="folder1,folder2,...")
 	public List<File> folders = new ArrayList<File>();
 
 	public def static void main(String[] args) {
@@ -53,10 +53,6 @@ public class Main {
 
 			// parse the arguments.
 			parser.parseArgument(args);
-
-			// checking if enough arguments are given.
-			if(folders.isEmpty())
-				throw new CmdLineException(parser, "No folders given.");
 
 			// setting args for step one
 			val stepone = new Pdedependencies2model(folders, colorSeed)
@@ -94,9 +90,9 @@ public class Main {
 
 			System.err.println(e.getMessage());
 			System.err.println("Usage: java -jar pdedependencies2dot.jar [options...] <folder1,folder2,...>");
-			println()
-			parser.printUsage(System.err);
-			System.err.println();
+			System.err.println()
+			System.err.println("Arguments and options:")
+			parser.printUsage(System.err)
 
 			return;
 		}
