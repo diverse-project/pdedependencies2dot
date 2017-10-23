@@ -133,7 +133,7 @@ class Pdedependencies2model {
 			for (p : handler.containedPlugins) {
 				if(okPrefix(p)) {
 					val plugin = findPluginOrCreate(p)
-					if(plugin.containingElement != null && plugin.containingElement instanceof Feature)
+					if(plugin.containingElement !== null && plugin.containingElement instanceof Feature)
 						feature.additionnalPlugins.add(plugin)
 					else
 						feature.plugins.add(plugin)
@@ -175,12 +175,12 @@ class Pdedependencies2model {
 
 		if(okPrefix(name)) {
 
-			val allRequired = if(attributes.get(requireName) != null) attributes.get(requireName) as String else null
+			val allRequired = if(attributes.get(requireName) !== null) attributes.get(requireName) as String else null
 
 			val plugin = findPluginOrCreate(name)
 			plugin.processed = true
 
-			if(allRequired != null && !allRequired.equals("")) {
+			if(allRequired !== null && !allRequired.equals("")) {
 				for (r : allRequired.split(",")) {
 					val rname = parseManifestValue(r)
 					if(okPrefix(rname)) {
@@ -238,7 +238,7 @@ class Pdedependencies2model {
 			manifestMatcher = FileSystems.getDefault().getPathMatcher("glob:MANIFEST.MF");
 			featureMatcher = FileSystems.getDefault().getPathMatcher("glob:feature.xml");
 
-			if(excludeFilesPatterns != null) {
+			if(excludeFilesPatterns !== null) {
 				for (p : excludeFilesPatterns)
 					excludeFilesPatternMatcher.add(FileSystems.getDefault().getPathMatcher("glob:" + p))
 			}
@@ -252,7 +252,7 @@ class Pdedependencies2model {
 		def void find(Path file) {
 			val Path name = file.getFileName();
 			if(!excludeFilesPatternMatcher.exists[pm|pm.matches(file)]) {
-				if(name != null) {
+				if(name !== null) {
 					if(manifestMatcher.matches(name)) {
 						manifestResults.add(file);
 					} else if(featureMatcher.matches(name)) {

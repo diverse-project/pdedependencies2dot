@@ -62,11 +62,11 @@ public class Main {
 			val stepone = new Pdedependencies2model(folders, colorSeed)
 
 			// setting options
-			if(allowedPrefixes != null && !allowedPrefixes.isEmpty)
+			if(allowedPrefixes !== null && !allowedPrefixes.isEmpty)
 				stepone.addAllowedPrefixes(allowedPrefixes)
-			if(filteredPrefixes != null && !filteredPrefixes.isEmpty)
+			if(filteredPrefixes !== null && !filteredPrefixes.isEmpty)
 				stepone.addFilteredPrefixes(filteredPrefixes)
-			if(excludedFilePatterns != null)
+			if(excludedFilePatterns !== null)
 				stepone.addExcludedFilePatterns(excludedFilePatterns)
 
 			// starting step one	
@@ -75,16 +75,16 @@ public class Main {
 			// setting parameter for step two
 			val steptwo = new Model2dot(stepone.graph)
 
-			if(outputFile != null)
+			if(outputFile !== null)
 				steptwo.outputFile = outputFile
 
-			if(alwaysPrint != null)
+			if(alwaysPrint !== null)
 				steptwo.alwaysPrint = alwaysPrint
 
-			if(orientation != null)
+			if(orientation !== null)
 				steptwo.orientation = orientation
 				
-			if (hideExternal != null)
+			if (hideExternal !== null)
 				steptwo.hideExternal = true
 
 			// starting step two

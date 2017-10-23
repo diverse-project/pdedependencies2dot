@@ -146,7 +146,7 @@ digraph «graph.name» {
 
 		val String result = generateDot
 
-		if(outputFile != null) {
+		if(outputFile !== null) {
 			var PrintWriter out;
 			try {
 				out = new PrintWriter(outputFile)
