@@ -42,7 +42,7 @@ class Pdedependencies2model {
 	static val ModelFactory factory = ModelFactory.eINSTANCE
 	private val Random random
 
-	// Output 
+	// Output
 	@Accessors(PUBLIC_GETTER, PROTECTED_SETTER)
 	private val PDEGraph graph = factory.createPDEGraph
 
@@ -174,14 +174,13 @@ class Pdedependencies2model {
 		val name = parseManifestValue(attributes.get(bundleName) as String)
 
 		if(okPrefix(name)) {
-
 			val allRequired = if(attributes.get(requireName) !== null) attributes.get(requireName) as String else null
 
 			val plugin = findPluginOrCreate(name)
 			plugin.processed = true
 
 			if(allRequired !== null && !allRequired.equals("")) {
-				for (r : allRequired.split(",")) {
+				for (r : allRequired.split(",\n")) {
 					val rname = parseManifestValue(r)
 					if(okPrefix(rname)) {
 						plugin.dependencies.add(findPluginOrCreate(rname))
@@ -247,8 +246,7 @@ class Pdedependencies2model {
 		Set<Path> manifestResults = new HashSet<Path>;
 		Set<Path> featureResults = new HashSet<Path>;
 
-		// Compares the glob pattern against
-		// the file or directory name.
+		// Compares the glob pattern against the file or directory name.
 		def void find(Path file) {
 			val Path name = file.getFileName();
 			if(!excludeFilesPatternMatcher.exists[pm|pm.matches(file)]) {
@@ -256,14 +254,13 @@ class Pdedependencies2model {
 					if(manifestMatcher.matches(name)) {
 						manifestResults.add(file);
 					} else if(featureMatcher.matches(name)) {
-						featureResults.add(file)
+						featureResults.add(file);
 					}
 				}
 			}
 		}
 
-		// Invoke the patternmatching
-		// method on each file.
+		// Invoke the patternmatching method on each file.
 		public override FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
 			find(file);
 			return FileVisitResult.CONTINUE;
