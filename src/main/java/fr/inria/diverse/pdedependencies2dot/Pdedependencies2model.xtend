@@ -181,7 +181,15 @@ class Pdedependencies2model {
 			
 			if(allRequired !== null && !allRequired.equals("")) {
 				for (r : allRequired.split(",")) {
+					// remove spaces and everything after a semicolon (if any)
 					val rname = parseManifestValue(r)
+					// since allRequired is splitted using commas, if a project specifies their
+					// versions using the `xx.xxx.xxx;bundle-version="[y.y.y,y.y.z)",` format
+					// then we would have an iteration where rname would be `y.y.z")` so the
+					// presence of `"` has to be tested.
+					// Alternatively, but it's more complex, we could change okPrefix to ensure
+					// rname is a valid Java package id where each "word" begins with a lower
+					// case letter.
 					if(okPrefix(rname) && rname.indexOf("\"") == -1) {
 						plugin.dependencies.add(findPluginOrCreate(rname))
 					}
