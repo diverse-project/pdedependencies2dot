@@ -178,11 +178,11 @@ class Pdedependencies2model {
 
 			val plugin = findPluginOrCreate(name)
 			plugin.processed = true
-
+			
 			if(allRequired !== null && !allRequired.equals("")) {
-				for (r : allRequired.split(",\n")) {
+				for (r : allRequired.split(",")) {
 					val rname = parseManifestValue(r)
-					if(okPrefix(rname)) {
+					if(okPrefix(rname) && rname.indexOf("\"") == -1) {
 						plugin.dependencies.add(findPluginOrCreate(rname))
 					}
 				}
