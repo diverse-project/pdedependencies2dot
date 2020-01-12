@@ -1,6 +1,13 @@
 package fr.inria.diverse.pdedependencies2dot
 
+import fr.inria.diverse.pdedependencies2dot.model.Feature
+import fr.inria.diverse.pdedependencies2dot.model.ModelFactory
+import fr.inria.diverse.pdedependencies2dot.model.PDEGraph
+import fr.inria.diverse.pdedependencies2dot.model.Plugin
 import java.io.File
+import java.io.FileNotFoundException
+import java.io.PrintWriter
+import java.io.StringWriter
 import java.nio.file.FileSystems
 import java.nio.file.FileVisitResult
 import java.nio.file.Files
@@ -10,32 +17,24 @@ import java.nio.file.SimpleFileVisitor
 import java.nio.file.StandardOpenOption
 import java.nio.file.attribute.BasicFileAttributes
 import java.util.ArrayList
+import java.util.HashMap
 import java.util.HashSet
 import java.util.List
+import java.util.Map
+import java.util.Random
 import java.util.Set
 import java.util.jar.Attributes
 import java.util.jar.Manifest
 import javax.xml.parsers.SAXParser
 import javax.xml.parsers.SAXParserFactory
+import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.emf.ecore.resource.URIConverter
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.xml.sax.SAXException
 import org.xml.sax.helpers.DefaultHandler
-import fr.inria.diverse.pdedependencies2dot.model.Feature
-import fr.inria.diverse.pdedependencies2dot.model.ModelFactory
-import fr.inria.diverse.pdedependencies2dot.model.PDEGraph
-import fr.inria.diverse.pdedependencies2dot.model.Plugin
-import java.util.Random
-import java.io.PrintWriter
-import java.io.StringWriter
-
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
-import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.emf.ecore.resource.URIConverter
-import org.eclipse.emf.common.util.URI
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
-import java.io.FileNotFoundException
-import java.util.Map
-import java.util.HashMap
 
 class Pdedependencies2model {
 

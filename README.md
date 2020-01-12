@@ -65,6 +65,7 @@ To use it:
 $ java -jar target/pdedependencies2dot-1.0-shaded.jar --allowedPrefixes=org.company --filteredPrefixes=org.eclipse --outputFile=/tmp/mygraph.dot /my/development/folder
 ~~~
 
+
 ## Future work
 
 zest visualization within eclipse?
