@@ -25,6 +25,17 @@ import fr.inria.diverse.pdedependencies2dot.model.ModelFactory
 import fr.inria.diverse.pdedependencies2dot.model.PDEGraph
 import fr.inria.diverse.pdedependencies2dot.model.Plugin
 import java.util.Random
+import java.io.PrintWriter
+import java.io.StringWriter
+
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.emf.ecore.resource.URIConverter
+import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
+import java.io.FileNotFoundException
+import java.util.Map
+import java.util.HashMap
 
 class Pdedependencies2model {
 
@@ -45,6 +56,15 @@ class Pdedependencies2model {
 	// Output
 	@Accessors(PUBLIC_GETTER, PROTECTED_SETTER)
 	private val PDEGraph graph = factory.createPDEGraph
+	
+	@Accessors(PUBLIC_GETTER, PROTECTED_SETTER)
+	File outputFile;
+	
+	private ResourceSetImpl resourceSet;
+	private Resource resource;
+	private StringWriter stringWriter;
+	private URIConverter.WriteableOutputStream outputStream;
+	private Map options;
 
 	new(List<File> folders, int colorSeed) {
 		this.folders.addAll(folders)
@@ -82,6 +102,37 @@ class Pdedependencies2model {
 
 		for (p : finder.manifestResults) {
 			processManifest(p)
+		}
+	}
+	
+	def void saveModelToFile() {
+		if(outputFile === null) {
+			return
+		}
+		var PrintWriter out;
+
+		// Save EMF resource
+		Resource.Factory.Registry.INSTANCE
+		.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl());
+
+		resourceSet = new ResourceSetImpl();
+		resource = resourceSet.createResource(URI.createFileURI("pdegraph.ecore"));
+		resource.getContents().add(graph);
+
+		stringWriter = new StringWriter();
+		outputStream = new URIConverter.WriteableOutputStream(stringWriter, "UTF-8");
+		options = new HashMap<String, String>();
+		resource.save(outputStream, options);
+
+		var graphEcoreOutput = stringWriter.toString();
+
+		try {
+			out = new PrintWriter(outputFile)
+			out.print(graphEcoreOutput);
+		} catch(FileNotFoundException exc) {
+			System.err.println("An error occured when trying to write " + outputFile + ": " + exc.message)
+		} finally {
+			out?.close
 		}
 	}
 

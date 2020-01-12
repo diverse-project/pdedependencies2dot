@@ -42,6 +42,10 @@ Arguments and options:
                                          will write into this file instead of
                                          printing to the console. (default:
                                          /tmp/mygraph.dot)
+ --outputXMIFile=FILE                     : Path to the XMI output file. If given,
+                                         will write into this file instead of
+                                         printing to the console. (default:
+                                         /tmp/mygraph.dot)
 ~~~~
 
 
@@ -60,7 +64,6 @@ To use it:
 ~~~
 $ java -jar target/pdedependencies2dot-1.0-shaded.jar --allowedPrefixes=org.company --filteredPrefixes=org.eclipse --outputFile=/tmp/mygraph.dot /my/development/folder
 ~~~
-
 
 ## Future work
 
