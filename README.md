@@ -42,7 +42,7 @@ Arguments and options:
                                          will write into this file instead of
                                          printing to the console. (default:
                                          /tmp/mygraph.dot)
- --outputXMIFile=FILE                     : Path to the XMI output file. If given,
+ --outputXMIFile=FILE                  : Path to the XMI output file. If given,
                                          will write into this file instead of
                                          printing to the console. (default:
                                          /tmp/mygraph.dot)
