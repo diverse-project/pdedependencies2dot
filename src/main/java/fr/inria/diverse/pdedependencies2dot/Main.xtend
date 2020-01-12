@@ -72,8 +72,10 @@ public class Main {
 
 			// starting step one	
 			stepone.generate
-			if (outputXMIFile !== null)
+			if (outputXMIFile !== null) {
 				stepone.outputFile = outputXMIFile
+				stepone.saveModelToFile
+			}
 
 			// setting parameter for step two
 			val steptwo = new Model2dot(stepone.graph)
@@ -89,9 +91,6 @@ public class Main {
 
 			if (hideExternal !== null)
 				steptwo.hideExternal = true
-				
-			// starting step one
-			stepone.saveModelToFile
 
 			// starting step two
 			steptwo.generate
