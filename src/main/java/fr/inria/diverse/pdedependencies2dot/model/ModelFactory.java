@@ -49,6 +49,24 @@ public interface ModelFactory extends EFactory {
 	Feature createFeature();
 
 	/**
+	 * Returns a new object of class '<em>Bundle</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Bundle</em>'.
+	 * @generated
+	 */
+	Bundle createBundle();
+
+	/**
+	 * Returns a new object of class '<em>Product</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Product</em>'.
+	 * @generated
+	 */
+	Product createProduct();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

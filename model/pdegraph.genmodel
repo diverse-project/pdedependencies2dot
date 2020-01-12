@@ -10,22 +10,45 @@
       ecorePackage="pdegraph.ecore#/">
     <genClasses ecoreClass="pdegraph.ecore#//PDEGraph">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pdegraph.ecore#//PDEGraph/features"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pdegraph.ecore#//PDEGraph/bundleClasspath"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pdegraph.ecore#//PDEGraph/products"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pdegraph.ecore#//PDEGraph/bundleName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pdegraph.ecore#//PDEGraph/bundleSymbolicName"/>
     </genClasses>
     <genClasses ecoreClass="pdegraph.ecore#//Plugin">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference pdegraph.ecore#//Plugin/containingElement"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference pdegraph.ecore#//Plugin/dependencies"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pdegraph.ecore#//Plugin/classPath"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference pdegraph.ecore#//Plugin/exportedBundles"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference pdegraph.ecore#//Plugin/requiredBundles"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference pdegraph.ecore#//Plugin/importedPackages"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pdegraph.ecore#//Plugin/parameters"/>
     </genClasses>
     <genClasses ecoreClass="pdegraph.ecore#//Feature">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference pdegraph.ecore#//Feature/requiredFeatures"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference pdegraph.ecore#//Feature/containingGraph"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference pdegraph.ecore#//Feature/additionnalPlugins"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference pdegraph.ecore#//Feature/requiredPlugins"/>
     </genClasses>
     <genClasses ecoreClass="pdegraph.ecore#//PluginContainer">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pdegraph.ecore#//PluginContainer/plugins"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pdegraph.ecore#//PluginContainer/hue"/>
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference pdegraph.ecore#//PluginContainer/bundles"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pdegraph.ecore#//PluginContainer/description"/>
     </genClasses>
     <genClasses ecoreClass="pdegraph.ecore#//NamedElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pdegraph.ecore#//NamedElement/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pdegraph.ecore#//NamedElement/version"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="pdegraph.ecore#//Processeable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pdegraph.ecore#//Processeable/processed"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="pdegraph.ecore#//Bundle">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference pdegraph.ecore#//Bundle/containingElement"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pdegraph.ecore#//Bundle/parameters"/>
+    </genClasses>
+    <genClasses ecoreClass="pdegraph.ecore#//Product">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference pdegraph.ecore#//Product/containingGraph"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference pdegraph.ecore#//Product/features"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

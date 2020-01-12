@@ -2,6 +2,7 @@
  */
 package fr.inria.diverse.pdedependencies2dot.model.impl;
 
+import fr.inria.diverse.pdedependencies2dot.model.Bundle;
 import fr.inria.diverse.pdedependencies2dot.model.ModelPackage;
 import fr.inria.diverse.pdedependencies2dot.model.Plugin;
 import fr.inria.diverse.pdedependencies2dot.model.PluginContainer;
@@ -32,7 +33,11 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <ul>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PluginImpl#isProcessed <em>Processed</em>}</li>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PluginImpl#getContainingElement <em>Containing Element</em>}</li>
- *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PluginImpl#getDependencies <em>Dependencies</em>}</li>
+ *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PluginImpl#getClassPath <em>Class Path</em>}</li>
+ *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PluginImpl#getExportedBundles <em>Exported Bundles</em>}</li>
+ *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PluginImpl#getRequiredBundles <em>Required Bundles</em>}</li>
+ *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PluginImpl#getImportedPackages <em>Imported Packages</em>}</li>
+ *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PluginImpl#getParameters <em>Parameters</em>}</li>
  * </ul>
  *
  * @generated
@@ -59,14 +64,74 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 	protected boolean processed = PROCESSED_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getDependencies() <em>Dependencies</em>}' reference list.
+	 * The default value of the '{@link #getClassPath() <em>Class Path</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDependencies()
+	 * @see #getClassPath()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Plugin> dependencies;
+	protected static final String CLASS_PATH_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getClassPath() <em>Class Path</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getClassPath()
+	 * @generated
+	 * @ordered
+	 */
+	protected String classPath = CLASS_PATH_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getExportedBundles() <em>Exported Bundles</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExportedBundles()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Bundle> exportedBundles;
+
+	/**
+	 * The cached value of the '{@link #getRequiredBundles() <em>Required Bundles</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRequiredBundles()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Bundle> requiredBundles;
+
+	/**
+	 * The cached value of the '{@link #getImportedPackages() <em>Imported Packages</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImportedPackages()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Plugin> importedPackages;
+
+	/**
+	 * The default value of the '{@link #getParameters() <em>Parameters</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParameters()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PARAMETERS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParameters()
+	 * @generated
+	 * @ordered
+	 */
+	protected String parameters = PARAMETERS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -92,6 +157,7 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isProcessed() {
 		return processed;
 	}
@@ -101,6 +167,7 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setProcessed(boolean newProcessed) {
 		boolean oldProcessed = processed;
 		processed = newProcessed;
@@ -113,6 +180,7 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PluginContainer getContainingElement() {
 		if (eContainerFeatureID() != ModelPackage.PLUGIN__CONTAINING_ELEMENT) return null;
 		return (PluginContainer)eInternalContainer();
@@ -133,6 +201,7 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setContainingElement(PluginContainer newContainingElement) {
 		if (newContainingElement != eInternalContainer() || (eContainerFeatureID() != ModelPackage.PLUGIN__CONTAINING_ELEMENT && newContainingElement != null)) {
 			if (EcoreUtil.isAncestor(this, newContainingElement))
@@ -154,11 +223,84 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Plugin> getDependencies() {
-		if (dependencies == null) {
-			dependencies = new EObjectResolvingEList<Plugin>(Plugin.class, this, ModelPackage.PLUGIN__DEPENDENCIES);
+	@Override
+	public String getClassPath() {
+		return classPath;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setClassPath(String newClassPath) {
+		String oldClassPath = classPath;
+		classPath = newClassPath;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PLUGIN__CLASS_PATH, oldClassPath, classPath));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Bundle> getExportedBundles() {
+		if (exportedBundles == null) {
+			exportedBundles = new EObjectResolvingEList<Bundle>(Bundle.class, this, ModelPackage.PLUGIN__EXPORTED_BUNDLES);
 		}
-		return dependencies;
+		return exportedBundles;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Bundle> getRequiredBundles() {
+		if (requiredBundles == null) {
+			requiredBundles = new EObjectResolvingEList<Bundle>(Bundle.class, this, ModelPackage.PLUGIN__REQUIRED_BUNDLES);
+		}
+		return requiredBundles;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Plugin> getImportedPackages() {
+		if (importedPackages == null) {
+			importedPackages = new EObjectResolvingEList<Plugin>(Plugin.class, this, ModelPackage.PLUGIN__IMPORTED_PACKAGES);
+		}
+		return importedPackages;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getParameters() {
+		return parameters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setParameters(String newParameters) {
+		String oldParameters = parameters;
+		parameters = newParameters;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PLUGIN__PARAMETERS, oldParameters, parameters));
 	}
 
 	/**
@@ -217,8 +359,16 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 				return isProcessed();
 			case ModelPackage.PLUGIN__CONTAINING_ELEMENT:
 				return getContainingElement();
-			case ModelPackage.PLUGIN__DEPENDENCIES:
-				return getDependencies();
+			case ModelPackage.PLUGIN__CLASS_PATH:
+				return getClassPath();
+			case ModelPackage.PLUGIN__EXPORTED_BUNDLES:
+				return getExportedBundles();
+			case ModelPackage.PLUGIN__REQUIRED_BUNDLES:
+				return getRequiredBundles();
+			case ModelPackage.PLUGIN__IMPORTED_PACKAGES:
+				return getImportedPackages();
+			case ModelPackage.PLUGIN__PARAMETERS:
+				return getParameters();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -238,9 +388,23 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 			case ModelPackage.PLUGIN__CONTAINING_ELEMENT:
 				setContainingElement((PluginContainer)newValue);
 				return;
-			case ModelPackage.PLUGIN__DEPENDENCIES:
-				getDependencies().clear();
-				getDependencies().addAll((Collection<? extends Plugin>)newValue);
+			case ModelPackage.PLUGIN__CLASS_PATH:
+				setClassPath((String)newValue);
+				return;
+			case ModelPackage.PLUGIN__EXPORTED_BUNDLES:
+				getExportedBundles().clear();
+				getExportedBundles().addAll((Collection<? extends Bundle>)newValue);
+				return;
+			case ModelPackage.PLUGIN__REQUIRED_BUNDLES:
+				getRequiredBundles().clear();
+				getRequiredBundles().addAll((Collection<? extends Bundle>)newValue);
+				return;
+			case ModelPackage.PLUGIN__IMPORTED_PACKAGES:
+				getImportedPackages().clear();
+				getImportedPackages().addAll((Collection<? extends Plugin>)newValue);
+				return;
+			case ModelPackage.PLUGIN__PARAMETERS:
+				setParameters((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -260,8 +424,20 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 			case ModelPackage.PLUGIN__CONTAINING_ELEMENT:
 				setContainingElement((PluginContainer)null);
 				return;
-			case ModelPackage.PLUGIN__DEPENDENCIES:
-				getDependencies().clear();
+			case ModelPackage.PLUGIN__CLASS_PATH:
+				setClassPath(CLASS_PATH_EDEFAULT);
+				return;
+			case ModelPackage.PLUGIN__EXPORTED_BUNDLES:
+				getExportedBundles().clear();
+				return;
+			case ModelPackage.PLUGIN__REQUIRED_BUNDLES:
+				getRequiredBundles().clear();
+				return;
+			case ModelPackage.PLUGIN__IMPORTED_PACKAGES:
+				getImportedPackages().clear();
+				return;
+			case ModelPackage.PLUGIN__PARAMETERS:
+				setParameters(PARAMETERS_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -279,8 +455,16 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 				return processed != PROCESSED_EDEFAULT;
 			case ModelPackage.PLUGIN__CONTAINING_ELEMENT:
 				return getContainingElement() != null;
-			case ModelPackage.PLUGIN__DEPENDENCIES:
-				return dependencies != null && !dependencies.isEmpty();
+			case ModelPackage.PLUGIN__CLASS_PATH:
+				return CLASS_PATH_EDEFAULT == null ? classPath != null : !CLASS_PATH_EDEFAULT.equals(classPath);
+			case ModelPackage.PLUGIN__EXPORTED_BUNDLES:
+				return exportedBundles != null && !exportedBundles.isEmpty();
+			case ModelPackage.PLUGIN__REQUIRED_BUNDLES:
+				return requiredBundles != null && !requiredBundles.isEmpty();
+			case ModelPackage.PLUGIN__IMPORTED_PACKAGES:
+				return importedPackages != null && !importedPackages.isEmpty();
+			case ModelPackage.PLUGIN__PARAMETERS:
+				return PARAMETERS_EDEFAULT == null ? parameters != null : !PARAMETERS_EDEFAULT.equals(parameters);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -326,9 +510,13 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (processed: ");
 		result.append(processed);
+		result.append(", classPath: ");
+		result.append(classPath);
+		result.append(", parameters: ");
+		result.append(parameters);
 		result.append(')');
 		return result.toString();
 	}

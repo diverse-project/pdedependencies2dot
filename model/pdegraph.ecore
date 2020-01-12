@@ -4,12 +4,23 @@
   <eClassifiers xsi:type="ecore:EClass" name="PDEGraph" eSuperTypes="#//PluginContainer">
     <eStructuralFeatures xsi:type="ecore:EReference" name="features" ordered="false"
         upperBound="-1" eType="#//Feature" containment="true" eOpposite="#//Feature/containingGraph"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bundleClasspath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="products" upperBound="-1"
+        eType="#//Product" containment="true" eOpposite="#//Product/containingGraph"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bundleName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bundleSymbolicName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Plugin" eSuperTypes="#//NamedElement #//Processeable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="containingElement" eType="#//PluginContainer"
         eOpposite="#//PluginContainer/plugins"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dependencies" ordered="false"
-        upperBound="-1" eType="#//Plugin"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="classPath" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exportedBundles" upperBound="-1"
+        eType="#//Bundle"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requiredBundles" upperBound="-1"
+        eType="#//Bundle"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="importedPackages" upperBound="-1"
+        eType="#//Plugin"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parameters" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Feature" eSuperTypes="#//PluginContainer #//Processeable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="requiredFeatures" ordered="false"
@@ -24,13 +35,28 @@
   <eClassifiers xsi:type="ecore:EClass" name="PluginContainer" abstract="true" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="plugins" ordered="false"
         upperBound="-1" eType="#//Plugin" containment="true" eOpposite="#//Plugin/containingElement"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hue" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hue" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bundles" upperBound="-1"
+        eType="#//Bundle" containment="true" eOpposite="#//Bundle/containingElement"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Processeable" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="processed" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="processed" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Bundle" eSuperTypes="#//NamedElement #//Processeable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containingElement" eType="#//PluginContainer"
+        eOpposite="#//PluginContainer/bundles"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parameters" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Product" eSuperTypes="#//PluginContainer #//Processeable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containingGraph" eType="#//PDEGraph"
+        eOpposite="#//PDEGraph/products"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="features" upperBound="-1"
+        eType="#//Feature"/>
   </eClassifiers>
 </ecore:EPackage>

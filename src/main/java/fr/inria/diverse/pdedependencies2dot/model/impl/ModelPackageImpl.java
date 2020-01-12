@@ -2,6 +2,7 @@
  */
 package fr.inria.diverse.pdedependencies2dot.model.impl;
 
+import fr.inria.diverse.pdedependencies2dot.model.Bundle;
 import fr.inria.diverse.pdedependencies2dot.model.Feature;
 import fr.inria.diverse.pdedependencies2dot.model.ModelFactory;
 import fr.inria.diverse.pdedependencies2dot.model.ModelPackage;
@@ -10,6 +11,7 @@ import fr.inria.diverse.pdedependencies2dot.model.PDEGraph;
 import fr.inria.diverse.pdedependencies2dot.model.Plugin;
 import fr.inria.diverse.pdedependencies2dot.model.PluginContainer;
 import fr.inria.diverse.pdedependencies2dot.model.Processeable;
+import fr.inria.diverse.pdedependencies2dot.model.Product;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -69,6 +71,20 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	private EClass processeableEClass = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass bundleEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass productEClass = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -96,7 +112,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link ModelPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -110,7 +126,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		if (isInited) return (ModelPackage)EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
 
 		// Obtain or create and register package
-		ModelPackageImpl theModelPackage = (ModelPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ModelPackageImpl());
+		Object registeredModelPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		ModelPackageImpl theModelPackage = registeredModelPackage instanceof ModelPackageImpl ? (ModelPackageImpl)registeredModelPackage : new ModelPackageImpl();
 
 		isInited = true;
 
@@ -126,7 +143,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		// Mark meta-data to indicate it can't be changed
 		theModelPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(ModelPackage.eNS_URI, theModelPackage);
 		return theModelPackage;
@@ -137,6 +153,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPDEGraph() {
 		return pdeGraphEClass;
 	}
@@ -146,6 +163,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPDEGraph_Features() {
 		return (EReference)pdeGraphEClass.getEStructuralFeatures().get(0);
 	}
@@ -155,6 +173,47 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EAttribute getPDEGraph_BundleClasspath() {
+		return (EAttribute)pdeGraphEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getPDEGraph_Products() {
+		return (EReference)pdeGraphEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getPDEGraph_BundleName() {
+		return (EAttribute)pdeGraphEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getPDEGraph_BundleSymbolicName() {
+		return (EAttribute)pdeGraphEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getPlugin() {
 		return pluginEClass;
 	}
@@ -164,6 +223,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPlugin_ContainingElement() {
 		return (EReference)pluginEClass.getEStructuralFeatures().get(0);
 	}
@@ -173,8 +233,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPlugin_Dependencies() {
-		return (EReference)pluginEClass.getEStructuralFeatures().get(1);
+	@Override
+	public EAttribute getPlugin_ClassPath() {
+		return (EAttribute)pluginEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -182,6 +243,47 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EReference getPlugin_ExportedBundles() {
+		return (EReference)pluginEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getPlugin_RequiredBundles() {
+		return (EReference)pluginEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getPlugin_ImportedPackages() {
+		return (EReference)pluginEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getPlugin_Parameters() {
+		return (EAttribute)pluginEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getFeature() {
 		return featureEClass;
 	}
@@ -191,6 +293,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFeature_RequiredFeatures() {
 		return (EReference)featureEClass.getEStructuralFeatures().get(0);
 	}
@@ -200,6 +303,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFeature_ContainingGraph() {
 		return (EReference)featureEClass.getEStructuralFeatures().get(1);
 	}
@@ -209,6 +313,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFeature_AdditionnalPlugins() {
 		return (EReference)featureEClass.getEStructuralFeatures().get(2);
 	}
@@ -218,6 +323,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFeature_RequiredPlugins() {
 		return (EReference)featureEClass.getEStructuralFeatures().get(3);
 	}
@@ -227,6 +333,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPluginContainer() {
 		return pluginContainerEClass;
 	}
@@ -236,6 +343,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPluginContainer_Plugins() {
 		return (EReference)pluginContainerEClass.getEStructuralFeatures().get(0);
 	}
@@ -245,6 +353,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPluginContainer_Hue() {
 		return (EAttribute)pluginContainerEClass.getEStructuralFeatures().get(1);
 	}
@@ -254,6 +363,27 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EReference getPluginContainer_Bundles() {
+		return (EReference)pluginContainerEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getPluginContainer_Description() {
+		return (EAttribute)pluginContainerEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getNamedElement() {
 		return namedElementEClass;
 	}
@@ -263,6 +393,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getNamedElement_Name() {
 		return (EAttribute)namedElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -272,6 +403,17 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EAttribute getNamedElement_Version() {
+		return (EAttribute)namedElementEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getProcesseable() {
 		return processeableEClass;
 	}
@@ -281,6 +423,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getProcesseable_Processed() {
 		return (EAttribute)processeableEClass.getEStructuralFeatures().get(0);
 	}
@@ -290,6 +433,67 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EClass getBundle() {
+		return bundleEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getBundle_ContainingElement() {
+		return (EReference)bundleEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getBundle_Parameters() {
+		return (EAttribute)bundleEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getProduct() {
+		return productEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getProduct_ContainingGraph() {
+		return (EReference)productEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getProduct_Features() {
+		return (EReference)productEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public ModelFactory getModelFactory() {
 		return (ModelFactory)getEFactoryInstance();
 	}
@@ -315,10 +519,18 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		// Create classes and their features
 		pdeGraphEClass = createEClass(PDE_GRAPH);
 		createEReference(pdeGraphEClass, PDE_GRAPH__FEATURES);
+		createEAttribute(pdeGraphEClass, PDE_GRAPH__BUNDLE_CLASSPATH);
+		createEReference(pdeGraphEClass, PDE_GRAPH__PRODUCTS);
+		createEAttribute(pdeGraphEClass, PDE_GRAPH__BUNDLE_NAME);
+		createEAttribute(pdeGraphEClass, PDE_GRAPH__BUNDLE_SYMBOLIC_NAME);
 
 		pluginEClass = createEClass(PLUGIN);
 		createEReference(pluginEClass, PLUGIN__CONTAINING_ELEMENT);
-		createEReference(pluginEClass, PLUGIN__DEPENDENCIES);
+		createEAttribute(pluginEClass, PLUGIN__CLASS_PATH);
+		createEReference(pluginEClass, PLUGIN__EXPORTED_BUNDLES);
+		createEReference(pluginEClass, PLUGIN__REQUIRED_BUNDLES);
+		createEReference(pluginEClass, PLUGIN__IMPORTED_PACKAGES);
+		createEAttribute(pluginEClass, PLUGIN__PARAMETERS);
 
 		featureEClass = createEClass(FEATURE);
 		createEReference(featureEClass, FEATURE__REQUIRED_FEATURES);
@@ -329,12 +541,23 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		pluginContainerEClass = createEClass(PLUGIN_CONTAINER);
 		createEReference(pluginContainerEClass, PLUGIN_CONTAINER__PLUGINS);
 		createEAttribute(pluginContainerEClass, PLUGIN_CONTAINER__HUE);
+		createEReference(pluginContainerEClass, PLUGIN_CONTAINER__BUNDLES);
+		createEAttribute(pluginContainerEClass, PLUGIN_CONTAINER__DESCRIPTION);
 
 		namedElementEClass = createEClass(NAMED_ELEMENT);
 		createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
+		createEAttribute(namedElementEClass, NAMED_ELEMENT__VERSION);
 
 		processeableEClass = createEClass(PROCESSEABLE);
 		createEAttribute(processeableEClass, PROCESSEABLE__PROCESSED);
+
+		bundleEClass = createEClass(BUNDLE);
+		createEReference(bundleEClass, BUNDLE__CONTAINING_ELEMENT);
+		createEAttribute(bundleEClass, BUNDLE__PARAMETERS);
+
+		productEClass = createEClass(PRODUCT);
+		createEReference(productEClass, PRODUCT__CONTAINING_GRAPH);
+		createEReference(productEClass, PRODUCT__FEATURES);
 	}
 
 	/**
@@ -374,14 +597,26 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		featureEClass.getESuperTypes().add(this.getPluginContainer());
 		featureEClass.getESuperTypes().add(this.getProcesseable());
 		pluginContainerEClass.getESuperTypes().add(this.getNamedElement());
+		bundleEClass.getESuperTypes().add(this.getNamedElement());
+		bundleEClass.getESuperTypes().add(this.getProcesseable());
+		productEClass.getESuperTypes().add(this.getPluginContainer());
+		productEClass.getESuperTypes().add(this.getProcesseable());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(pdeGraphEClass, PDEGraph.class, "PDEGraph", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPDEGraph_Features(), this.getFeature(), this.getFeature_ContainingGraph(), "features", null, 0, -1, PDEGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getPDEGraph_BundleClasspath(), ecorePackage.getEString(), "bundleClasspath", null, 0, 1, PDEGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPDEGraph_Products(), this.getProduct(), this.getProduct_ContainingGraph(), "products", null, 0, -1, PDEGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPDEGraph_BundleName(), ecorePackage.getEString(), "bundleName", null, 0, 1, PDEGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPDEGraph_BundleSymbolicName(), ecorePackage.getEString(), "bundleSymbolicName", null, 0, 1, PDEGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(pluginEClass, Plugin.class, "Plugin", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPlugin_ContainingElement(), this.getPluginContainer(), this.getPluginContainer_Plugins(), "containingElement", null, 0, 1, Plugin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPlugin_Dependencies(), this.getPlugin(), null, "dependencies", null, 0, -1, Plugin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getPlugin_ClassPath(), theEcorePackage.getEString(), "classPath", null, 0, 1, Plugin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPlugin_ExportedBundles(), this.getBundle(), null, "exportedBundles", null, 0, -1, Plugin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPlugin_RequiredBundles(), this.getBundle(), null, "requiredBundles", null, 0, -1, Plugin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPlugin_ImportedPackages(), this.getPlugin(), null, "importedPackages", null, 0, -1, Plugin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPlugin_Parameters(), theEcorePackage.getEString(), "parameters", null, 0, 1, Plugin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(featureEClass, Feature.class, "Feature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFeature_RequiredFeatures(), this.getFeature(), null, "requiredFeatures", null, 0, -1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -392,12 +627,23 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEClass(pluginContainerEClass, PluginContainer.class, "PluginContainer", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPluginContainer_Plugins(), this.getPlugin(), this.getPlugin_ContainingElement(), "plugins", null, 0, -1, PluginContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getPluginContainer_Hue(), theEcorePackage.getEFloat(), "hue", null, 0, 1, PluginContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPluginContainer_Bundles(), this.getBundle(), this.getBundle_ContainingElement(), "bundles", null, 0, -1, PluginContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPluginContainer_Description(), ecorePackage.getEString(), "description", null, 0, 1, PluginContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(namedElementEClass, NamedElement.class, "NamedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getNamedElement_Name(), theEcorePackage.getEString(), "name", null, 0, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNamedElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNamedElement_Version(), ecorePackage.getEString(), "version", null, 0, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(processeableEClass, Processeable.class, "Processeable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getProcesseable_Processed(), theEcorePackage.getEBoolean(), "processed", null, 0, 1, Processeable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(bundleEClass, Bundle.class, "Bundle", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getBundle_ContainingElement(), this.getPluginContainer(), this.getPluginContainer_Bundles(), "containingElement", null, 0, 1, Bundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBundle_Parameters(), theEcorePackage.getEString(), "parameters", null, 0, 1, Bundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(productEClass, Product.class, "Product", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getProduct_ContainingGraph(), this.getPDEGraph(), this.getPDEGraph_Products(), "containingGraph", null, 0, 1, Product.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProduct_Features(), this.getFeature(), null, "features", null, 0, -1, Product.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

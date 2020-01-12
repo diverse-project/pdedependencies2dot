@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.NamedElement#getName <em>Name</em>}</li>
+ *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.NamedElement#getVersion <em>Version</em>}</li>
  * </ul>
  *
  * @see fr.inria.diverse.pdedependencies2dot.model.ModelPackage#getNamedElement()
@@ -24,10 +25,6 @@ public interface NamedElement extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
@@ -46,5 +43,27 @@ public interface NamedElement extends EObject {
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Version</em>' attribute.
+	 * @see #setVersion(String)
+	 * @see fr.inria.diverse.pdedependencies2dot.model.ModelPackage#getNamedElement_Version()
+	 * @model
+	 * @generated
+	 */
+	String getVersion();
+
+	/**
+	 * Sets the value of the '{@link fr.inria.diverse.pdedependencies2dot.model.NamedElement#getVersion <em>Version</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Version</em>' attribute.
+	 * @see #getVersion()
+	 * @generated
+	 */
+	void setVersion(String value);
 
 } // NamedElement

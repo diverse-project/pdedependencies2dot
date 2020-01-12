@@ -2,6 +2,7 @@
  */
 package fr.inria.diverse.pdedependencies2dot.model.impl;
 
+import fr.inria.diverse.pdedependencies2dot.model.Bundle;
 import fr.inria.diverse.pdedependencies2dot.model.ModelPackage;
 import fr.inria.diverse.pdedependencies2dot.model.Plugin;
 import fr.inria.diverse.pdedependencies2dot.model.PluginContainer;
@@ -31,6 +32,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PluginContainerImpl#getPlugins <em>Plugins</em>}</li>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PluginContainerImpl#getHue <em>Hue</em>}</li>
+ *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PluginContainerImpl#getBundles <em>Bundles</em>}</li>
+ *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PluginContainerImpl#getDescription <em>Description</em>}</li>
  * </ul>
  *
  * @generated
@@ -67,6 +70,36 @@ public abstract class PluginContainerImpl extends NamedElementImpl implements Pl
 	protected float hue = HUE_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getBundles() <em>Bundles</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBundles()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Bundle> bundles;
+
+	/**
+	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DESCRIPTION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected String description = DESCRIPTION_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -90,6 +123,7 @@ public abstract class PluginContainerImpl extends NamedElementImpl implements Pl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Plugin> getPlugins() {
 		if (plugins == null) {
 			plugins = new EObjectContainmentWithInverseEList<Plugin>(Plugin.class, this, ModelPackage.PLUGIN_CONTAINER__PLUGINS, ModelPackage.PLUGIN__CONTAINING_ELEMENT);
@@ -102,6 +136,7 @@ public abstract class PluginContainerImpl extends NamedElementImpl implements Pl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public float getHue() {
 		return hue;
 	}
@@ -111,11 +146,48 @@ public abstract class PluginContainerImpl extends NamedElementImpl implements Pl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setHue(float newHue) {
 		float oldHue = hue;
 		hue = newHue;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PLUGIN_CONTAINER__HUE, oldHue, hue));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Bundle> getBundles() {
+		if (bundles == null) {
+			bundles = new EObjectContainmentWithInverseEList<Bundle>(Bundle.class, this, ModelPackage.PLUGIN_CONTAINER__BUNDLES, ModelPackage.BUNDLE__CONTAINING_ELEMENT);
+		}
+		return bundles;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setDescription(String newDescription) {
+		String oldDescription = description;
+		description = newDescription;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PLUGIN_CONTAINER__DESCRIPTION, oldDescription, description));
 	}
 
 	/**
@@ -129,6 +201,8 @@ public abstract class PluginContainerImpl extends NamedElementImpl implements Pl
 		switch (featureID) {
 			case ModelPackage.PLUGIN_CONTAINER__PLUGINS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getPlugins()).basicAdd(otherEnd, msgs);
+			case ModelPackage.PLUGIN_CONTAINER__BUNDLES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getBundles()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -143,6 +217,8 @@ public abstract class PluginContainerImpl extends NamedElementImpl implements Pl
 		switch (featureID) {
 			case ModelPackage.PLUGIN_CONTAINER__PLUGINS:
 				return ((InternalEList<?>)getPlugins()).basicRemove(otherEnd, msgs);
+			case ModelPackage.PLUGIN_CONTAINER__BUNDLES:
+				return ((InternalEList<?>)getBundles()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -159,6 +235,10 @@ public abstract class PluginContainerImpl extends NamedElementImpl implements Pl
 				return getPlugins();
 			case ModelPackage.PLUGIN_CONTAINER__HUE:
 				return getHue();
+			case ModelPackage.PLUGIN_CONTAINER__BUNDLES:
+				return getBundles();
+			case ModelPackage.PLUGIN_CONTAINER__DESCRIPTION:
+				return getDescription();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -179,6 +259,13 @@ public abstract class PluginContainerImpl extends NamedElementImpl implements Pl
 			case ModelPackage.PLUGIN_CONTAINER__HUE:
 				setHue((Float)newValue);
 				return;
+			case ModelPackage.PLUGIN_CONTAINER__BUNDLES:
+				getBundles().clear();
+				getBundles().addAll((Collection<? extends Bundle>)newValue);
+				return;
+			case ModelPackage.PLUGIN_CONTAINER__DESCRIPTION:
+				setDescription((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -197,6 +284,12 @@ public abstract class PluginContainerImpl extends NamedElementImpl implements Pl
 			case ModelPackage.PLUGIN_CONTAINER__HUE:
 				setHue(HUE_EDEFAULT);
 				return;
+			case ModelPackage.PLUGIN_CONTAINER__BUNDLES:
+				getBundles().clear();
+				return;
+			case ModelPackage.PLUGIN_CONTAINER__DESCRIPTION:
+				setDescription(DESCRIPTION_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -213,6 +306,10 @@ public abstract class PluginContainerImpl extends NamedElementImpl implements Pl
 				return plugins != null && !plugins.isEmpty();
 			case ModelPackage.PLUGIN_CONTAINER__HUE:
 				return hue != HUE_EDEFAULT;
+			case ModelPackage.PLUGIN_CONTAINER__BUNDLES:
+				return bundles != null && !bundles.isEmpty();
+			case ModelPackage.PLUGIN_CONTAINER__DESCRIPTION:
+				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -226,9 +323,11 @@ public abstract class PluginContainerImpl extends NamedElementImpl implements Pl
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (hue: ");
 		result.append(hue);
+		result.append(", description: ");
+		result.append(description);
 		result.append(')');
 		return result.toString();
 	}
