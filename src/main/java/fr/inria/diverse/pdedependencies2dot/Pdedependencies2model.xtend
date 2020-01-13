@@ -558,7 +558,7 @@ class Pdedependencies2model {
 		override startElement(String uri, String localName, String qName, org.xml.sax.Attributes attributes) throws SAXException {
 			if(qName.equals("product"))
 				productName = attributes.getValue("uid")
-			else if(qName.equals("plugin"))
+			else if(qName.equals("feature"))
 				features.add(attributes.getValue("id"))
 		}
 	}
