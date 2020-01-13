@@ -35,6 +35,9 @@ class Model2dot {
 
 	new(PDEGraph graph) {
 		this.graph = graph
+		
+		// Replace all . - by _ because dot syntax does not accept digraph names containing . or -
+		this.graph.name = graph.name.replaceAll("[\\.-]","_")
 	}
 
 	private static def String clusterName(String featureName) {
