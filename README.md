@@ -17,7 +17,8 @@ Arguments and options:
  --allowedPrefixes=STRING              : List of allowed prefixes. If given, a
                                          found plugin/feature is not taken into
                                          account if its id doesn't match one of
-                                         these prefixes.
+                                         these prefixes. (default:
+                                         org.eclipse.gemoc)
  --alwaysPrint                         : If set, the output DOT graph is
                                          printed even if an output file is
                                          given.
