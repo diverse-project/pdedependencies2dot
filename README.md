@@ -19,8 +19,9 @@ Arguments and options:
                                          account if its id doesn't match one of
                                          these prefixes. (default:
                                          org.eclipse.gemoc)
- --alwaysPrint                         : If set, the output is printed even if
-                                         an output file is given.
+ --alwaysPrint                         : If set, the output DOT graph is
+                                         printed even if an output file is
+                                         given.
  --colorSeed=N                         : Seed for the color randomizer. Each
                                          seed is a completely different color
                                          set. (default: 12)
@@ -42,10 +43,12 @@ Arguments and options:
                                          will write into this file instead of
                                          printing to the console. (default:
                                          /tmp/mygraph.dot)
- --outputXMIFile=FILE                  : Path to the XMI output file. If given,
-                                         will write into this file instead of
-                                         printing to the console. (default:
-                                         /tmp/mygraph.dot)
+ --outputXMIFile=FILE                  : Path to the XMI output file which
+                                         contains the intermediate EMF model
+                                         representing the features/plugins and
+                                         their dependencies . If given, will
+                                         write into this file instead of
+                                         printing the DOT graph to the console.
 ~~~~
 
 
