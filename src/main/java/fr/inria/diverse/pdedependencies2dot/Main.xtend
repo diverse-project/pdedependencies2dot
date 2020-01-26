@@ -23,8 +23,11 @@ public class Main {
 
 	@Option(name="--outputFile", usage="Path to the output file. If given, will write into this file instead of printing to the console.")
 	public File outputFile;
+	
+	@Option(name="--outputXMIFile", usage="Path to the XMI output file which contains the intermediate EMF model representing the features/plugins and their dependencies . If given, will write into this file instead of printing the DOT graph to the console.")
+	public File outputXMIFile;
 
-	@Option(name="--alwaysPrint", usage="If set, the output is printed even if an output file is given.")
+	@Option(name="--alwaysPrint", usage="If set, the output DOT graph is printed even if an output file is given.")
 	public Boolean alwaysPrint
 
 	@Option(name="--orientation", usage="Sets the overall shape of the graph.")
@@ -69,6 +72,10 @@ public class Main {
 
 			// starting step one	
 			stepone.generate
+			if (outputXMIFile !== null) {
+				stepone.outputFile = outputXMIFile
+				stepone.saveModelToFile
+			}
 
 			// setting parameter for step two
 			val steptwo = new Model2dot(stepone.graph)
@@ -76,8 +83,8 @@ public class Main {
 			if (outputFile !== null)
 				steptwo.outputFile = outputFile
 
-			if (alwaysPrint !== null)
-				steptwo.alwaysPrint = alwaysPrint
+			if (alwaysPrint !== null || (outputFile === null && outputXMIFile === null))
+				steptwo.alwaysPrint = true
 
 			if (orientation !== null)
 				steptwo.orientation = orientation

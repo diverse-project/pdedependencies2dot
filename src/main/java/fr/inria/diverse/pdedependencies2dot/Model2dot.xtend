@@ -1,17 +1,17 @@
 package fr.inria.diverse.pdedependencies2dot
 
+import fr.inria.diverse.pdedependencies2dot.Main.Orientation
+import fr.inria.diverse.pdedependencies2dot.model.Feature
+import fr.inria.diverse.pdedependencies2dot.model.PDEGraph
+import fr.inria.diverse.pdedependencies2dot.model.Plugin
+import fr.inria.diverse.pdedependencies2dot.model.Processeable
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.PrintWriter
-import fr.inria.diverse.pdedependencies2dot.model.PDEGraph
-import fr.inria.diverse.pdedependencies2dot.model.Plugin
-import java.util.Random
-import fr.inria.diverse.pdedependencies2dot.Main.Orientation
-import org.eclipse.xtend.lib.annotations.Accessors
-import fr.inria.diverse.pdedependencies2dot.model.Feature
-import java.util.Map
 import java.util.HashMap
-import fr.inria.diverse.pdedependencies2dot.model.Processeable
+import java.util.Map
+import java.util.Random
+import org.eclipse.xtend.lib.annotations.Accessors
 
 class Model2dot {
 
@@ -159,7 +159,7 @@ digraph «graph.name» {
 
 		}
 
-		if(outputFile === null || alwaysPrint) {
+		if(alwaysPrint) {
 			println(result)
 		}
 	}

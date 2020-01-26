@@ -1,6 +1,13 @@
 package fr.inria.diverse.pdedependencies2dot
 
+import fr.inria.diverse.pdedependencies2dot.model.Feature
+import fr.inria.diverse.pdedependencies2dot.model.ModelFactory
+import fr.inria.diverse.pdedependencies2dot.model.PDEGraph
+import fr.inria.diverse.pdedependencies2dot.model.Plugin
 import java.io.File
+import java.io.FileNotFoundException
+import java.io.PrintWriter
+import java.io.StringWriter
 import java.nio.file.FileSystems
 import java.nio.file.FileVisitResult
 import java.nio.file.Files
@@ -10,21 +17,24 @@ import java.nio.file.SimpleFileVisitor
 import java.nio.file.StandardOpenOption
 import java.nio.file.attribute.BasicFileAttributes
 import java.util.ArrayList
+import java.util.HashMap
 import java.util.HashSet
 import java.util.List
+import java.util.Map
+import java.util.Random
 import java.util.Set
 import java.util.jar.Attributes
 import java.util.jar.Manifest
 import javax.xml.parsers.SAXParser
 import javax.xml.parsers.SAXParserFactory
+import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.emf.ecore.resource.URIConverter
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.xml.sax.SAXException
 import org.xml.sax.helpers.DefaultHandler
-import fr.inria.diverse.pdedependencies2dot.model.Feature
-import fr.inria.diverse.pdedependencies2dot.model.ModelFactory
-import fr.inria.diverse.pdedependencies2dot.model.PDEGraph
-import fr.inria.diverse.pdedependencies2dot.model.Plugin
-import java.util.Random
 
 class Pdedependencies2model {
 
@@ -45,6 +55,15 @@ class Pdedependencies2model {
 	// Output
 	@Accessors(PUBLIC_GETTER, PROTECTED_SETTER)
 	private val PDEGraph graph = factory.createPDEGraph
+	
+	@Accessors(PUBLIC_GETTER, PROTECTED_SETTER)
+	File outputFile;
+	
+	private ResourceSetImpl resourceSet;
+	private Resource resource;
+	private StringWriter stringWriter;
+	private URIConverter.WriteableOutputStream outputStream;
+	private Map options;
 
 	new(List<File> folders, int colorSeed) {
 		this.folders.addAll(folders)
@@ -82,6 +101,37 @@ class Pdedependencies2model {
 
 		for (p : finder.manifestResults) {
 			processManifest(p)
+		}
+	}
+	
+	def void saveModelToFile() {
+		if(outputFile === null) {
+			return
+		}
+		var PrintWriter out;
+
+		// Save EMF resource
+		Resource.Factory.Registry.INSTANCE
+		.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl());
+
+		resourceSet = new ResourceSetImpl();
+		resource = resourceSet.createResource(URI.createFileURI("pdegraph.ecore"));
+		resource.getContents().add(graph);
+
+		stringWriter = new StringWriter();
+		outputStream = new URIConverter.WriteableOutputStream(stringWriter, "UTF-8");
+		options = new HashMap<String, String>();
+		resource.save(outputStream, options);
+
+		var graphEcoreOutput = stringWriter.toString();
+
+		try {
+			out = new PrintWriter(outputFile)
+			out.print(graphEcoreOutput);
+		} catch(FileNotFoundException exc) {
+			System.err.println("An error occured when trying to write " + outputFile + ": " + exc.message)
+		} finally {
+			out?.close
 		}
 	}
 
