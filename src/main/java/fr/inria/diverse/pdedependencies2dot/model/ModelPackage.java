@@ -258,31 +258,13 @@ public interface ModelPackage extends EPackage {
 	int PDE_GRAPH__FEATURES = PLUGIN_CONTAINER_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Bundle Classpath</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PDE_GRAPH__BUNDLE_CLASSPATH = PLUGIN_CONTAINER_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Products</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PDE_GRAPH__PRODUCTS = PLUGIN_CONTAINER_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Bundle Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PDE_GRAPH__BUNDLE_NAME = PLUGIN_CONTAINER_FEATURE_COUNT + 3;
+	int PDE_GRAPH__PRODUCTS = PLUGIN_CONTAINER_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Bundle Symbolic Name</b></em>' attribute.
@@ -291,7 +273,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PDE_GRAPH__BUNDLE_SYMBOLIC_NAME = PLUGIN_CONTAINER_FEATURE_COUNT + 4;
+	int PDE_GRAPH__BUNDLE_SYMBOLIC_NAME = PLUGIN_CONTAINER_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>PDE Graph</em>' class.
@@ -300,7 +282,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PDE_GRAPH_FEATURE_COUNT = PLUGIN_CONTAINER_FEATURE_COUNT + 5;
+	int PDE_GRAPH_FEATURE_COUNT = PLUGIN_CONTAINER_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>PDE Graph</em>' class.
@@ -358,22 +340,13 @@ public interface ModelPackage extends EPackage {
 	int PLUGIN__CONTAINING_ELEMENT = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Class Path</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PLUGIN__CLASS_PATH = NAMED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
 	 * The feature id for the '<em><b>Exported Bundles</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PLUGIN__EXPORTED_BUNDLES = NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int PLUGIN__EXPORTED_BUNDLES = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Required Bundles</b></em>' reference list.
@@ -382,7 +355,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PLUGIN__REQUIRED_BUNDLES = NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int PLUGIN__REQUIRED_BUNDLES = NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Imported Packages</b></em>' reference list.
@@ -391,7 +364,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PLUGIN__IMPORTED_PACKAGES = NAMED_ELEMENT_FEATURE_COUNT + 5;
+	int PLUGIN__IMPORTED_PACKAGES = NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' attribute.
@@ -400,7 +373,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PLUGIN__PARAMETERS = NAMED_ELEMENT_FEATURE_COUNT + 6;
+	int PLUGIN__PARAMETERS = NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Plugin</em>' class.
@@ -409,7 +382,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PLUGIN_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 7;
+	int PLUGIN_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of operations of the '<em>Plugin</em>' class.
@@ -789,17 +762,6 @@ public interface ModelPackage extends EPackage {
 	EReference getPDEGraph_Features();
 
 	/**
-	 * Returns the meta object for the attribute '{@link fr.inria.diverse.pdedependencies2dot.model.PDEGraph#getBundleClasspath <em>Bundle Classpath</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Bundle Classpath</em>'.
-	 * @see fr.inria.diverse.pdedependencies2dot.model.PDEGraph#getBundleClasspath()
-	 * @see #getPDEGraph()
-	 * @generated
-	 */
-	EAttribute getPDEGraph_BundleClasspath();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link fr.inria.diverse.pdedependencies2dot.model.PDEGraph#getProducts <em>Products</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -809,17 +771,6 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPDEGraph_Products();
-
-	/**
-	 * Returns the meta object for the attribute '{@link fr.inria.diverse.pdedependencies2dot.model.PDEGraph#getBundleName <em>Bundle Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Bundle Name</em>'.
-	 * @see fr.inria.diverse.pdedependencies2dot.model.PDEGraph#getBundleName()
-	 * @see #getPDEGraph()
-	 * @generated
-	 */
-	EAttribute getPDEGraph_BundleName();
 
 	/**
 	 * Returns the meta object for the attribute '{@link fr.inria.diverse.pdedependencies2dot.model.PDEGraph#getBundleSymbolicName <em>Bundle Symbolic Name</em>}'.
@@ -852,17 +803,6 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPlugin_ContainingElement();
-
-	/**
-	 * Returns the meta object for the attribute '{@link fr.inria.diverse.pdedependencies2dot.model.Plugin#getClassPath <em>Class Path</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Class Path</em>'.
-	 * @see fr.inria.diverse.pdedependencies2dot.model.Plugin#getClassPath()
-	 * @see #getPlugin()
-	 * @generated
-	 */
-	EAttribute getPlugin_ClassPath();
 
 	/**
 	 * Returns the meta object for the reference list '{@link fr.inria.diverse.pdedependencies2dot.model.Plugin#getExportedBundles <em>Exported Bundles</em>}'.
@@ -1175,28 +1115,12 @@ public interface ModelPackage extends EPackage {
 		EReference PDE_GRAPH__FEATURES = eINSTANCE.getPDEGraph_Features();
 
 		/**
-		 * The meta object literal for the '<em><b>Bundle Classpath</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PDE_GRAPH__BUNDLE_CLASSPATH = eINSTANCE.getPDEGraph_BundleClasspath();
-
-		/**
 		 * The meta object literal for the '<em><b>Products</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference PDE_GRAPH__PRODUCTS = eINSTANCE.getPDEGraph_Products();
-
-		/**
-		 * The meta object literal for the '<em><b>Bundle Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PDE_GRAPH__BUNDLE_NAME = eINSTANCE.getPDEGraph_BundleName();
 
 		/**
 		 * The meta object literal for the '<em><b>Bundle Symbolic Name</b></em>' attribute feature.
@@ -1223,14 +1147,6 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PLUGIN__CONTAINING_ELEMENT = eINSTANCE.getPlugin_ContainingElement();
-
-		/**
-		 * The meta object literal for the '<em><b>Class Path</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PLUGIN__CLASS_PATH = eINSTANCE.getPlugin_ClassPath();
 
 		/**
 		 * The meta object literal for the '<em><b>Exported Bundles</b></em>' reference list feature.

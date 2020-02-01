@@ -19,8 +19,6 @@ public interface PDEGraphValidator {
 	boolean validate();
 
 	boolean validateFeatures(EList<Feature> value);
-	boolean validateBundleClasspath(String value);
 	boolean validateProducts(EList<Product> value);
-	boolean validateBundleName(String value);
 	boolean validateBundleSymbolicName(String value);
 }

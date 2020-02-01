@@ -248,7 +248,6 @@ class Pdedependencies2model {
 	private def void addOneDependency(Plugin plugin, String oneRequired, String type) {
 		val rname = parseManifestValueName(oneRequired)
 		val rparams = parseManifestValueParameters(oneRequired)
-		// TODO : get plugin version
 		
 		if(okPrefix(rname)) {
 			
@@ -396,8 +395,6 @@ class Pdedependencies2model {
 			
 		val exportPackage = attributes.keySet.findFirst[a|
 			(a as Attributes.Name).equals(new Attributes.Name(EXPORT_PACKAGE))]
-			
-		// TODO : add bundleVersion
 		
 		val pluginName = parseManifestValueName(attributes.get(bundleSymbolicName) as String)
 		val pluginParameters = null

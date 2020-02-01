@@ -9,14 +9,11 @@ Package model <pdedependencies2dot>
 
   Class PDEGraph -> PluginContainer
     Reference features : Feature<<0..*>>
-    Attribute bundleClasspath : EString
     Reference products : Product<<0..*>>
-    Attribute bundleName : EString
     Attribute bundleSymbolicName : EString
 
   Class Plugin -> NamedElement, Processeable
     Reference containingElement : PluginContainer
-    Attribute classPath : EString
     Reference exportedBundles : Bundle<<0..*>>
     Reference requiredBundles : Bundle<<0..*>>
     Reference importedPackages : Plugin<<0..*>>

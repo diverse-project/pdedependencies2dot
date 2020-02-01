@@ -31,9 +31,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * </p>
  * <ul>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PDEGraphImpl#getFeatures <em>Features</em>}</li>
- *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PDEGraphImpl#getBundleClasspath <em>Bundle Classpath</em>}</li>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PDEGraphImpl#getProducts <em>Products</em>}</li>
- *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PDEGraphImpl#getBundleName <em>Bundle Name</em>}</li>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PDEGraphImpl#getBundleSymbolicName <em>Bundle Symbolic Name</em>}</li>
  * </ul>
  *
@@ -51,26 +49,6 @@ public class PDEGraphImpl extends PluginContainerImpl implements PDEGraph {
 	protected EList<Feature> features;
 
 	/**
-	 * The default value of the '{@link #getBundleClasspath() <em>Bundle Classpath</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBundleClasspath()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String BUNDLE_CLASSPATH_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getBundleClasspath() <em>Bundle Classpath</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBundleClasspath()
-	 * @generated
-	 * @ordered
-	 */
-	protected String bundleClasspath = BUNDLE_CLASSPATH_EDEFAULT;
-
-	/**
 	 * The cached value of the '{@link #getProducts() <em>Products</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -79,26 +57,6 @@ public class PDEGraphImpl extends PluginContainerImpl implements PDEGraph {
 	 * @ordered
 	 */
 	protected EList<Product> products;
-
-	/**
-	 * The default value of the '{@link #getBundleName() <em>Bundle Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBundleName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String BUNDLE_NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getBundleName() <em>Bundle Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBundleName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String bundleName = BUNDLE_NAME_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getBundleSymbolicName() <em>Bundle Symbolic Name</em>}' attribute.
@@ -158,57 +116,11 @@ public class PDEGraphImpl extends PluginContainerImpl implements PDEGraph {
 	 * @generated
 	 */
 	@Override
-	public String getBundleClasspath() {
-		return bundleClasspath;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setBundleClasspath(String newBundleClasspath) {
-		String oldBundleClasspath = bundleClasspath;
-		bundleClasspath = newBundleClasspath;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PDE_GRAPH__BUNDLE_CLASSPATH, oldBundleClasspath, bundleClasspath));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EList<Product> getProducts() {
 		if (products == null) {
 			products = new EObjectContainmentWithInverseEList<Product>(Product.class, this, ModelPackage.PDE_GRAPH__PRODUCTS, ModelPackage.PRODUCT__CONTAINING_GRAPH);
 		}
 		return products;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getBundleName() {
-		return bundleName;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setBundleName(String newBundleName) {
-		String oldBundleName = bundleName;
-		bundleName = newBundleName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PDE_GRAPH__BUNDLE_NAME, oldBundleName, bundleName));
 	}
 
 	/**
@@ -277,12 +189,8 @@ public class PDEGraphImpl extends PluginContainerImpl implements PDEGraph {
 		switch (featureID) {
 			case ModelPackage.PDE_GRAPH__FEATURES:
 				return getFeatures();
-			case ModelPackage.PDE_GRAPH__BUNDLE_CLASSPATH:
-				return getBundleClasspath();
 			case ModelPackage.PDE_GRAPH__PRODUCTS:
 				return getProducts();
-			case ModelPackage.PDE_GRAPH__BUNDLE_NAME:
-				return getBundleName();
 			case ModelPackage.PDE_GRAPH__BUNDLE_SYMBOLIC_NAME:
 				return getBundleSymbolicName();
 		}
@@ -302,15 +210,9 @@ public class PDEGraphImpl extends PluginContainerImpl implements PDEGraph {
 				getFeatures().clear();
 				getFeatures().addAll((Collection<? extends Feature>)newValue);
 				return;
-			case ModelPackage.PDE_GRAPH__BUNDLE_CLASSPATH:
-				setBundleClasspath((String)newValue);
-				return;
 			case ModelPackage.PDE_GRAPH__PRODUCTS:
 				getProducts().clear();
 				getProducts().addAll((Collection<? extends Product>)newValue);
-				return;
-			case ModelPackage.PDE_GRAPH__BUNDLE_NAME:
-				setBundleName((String)newValue);
 				return;
 			case ModelPackage.PDE_GRAPH__BUNDLE_SYMBOLIC_NAME:
 				setBundleSymbolicName((String)newValue);
@@ -330,14 +232,8 @@ public class PDEGraphImpl extends PluginContainerImpl implements PDEGraph {
 			case ModelPackage.PDE_GRAPH__FEATURES:
 				getFeatures().clear();
 				return;
-			case ModelPackage.PDE_GRAPH__BUNDLE_CLASSPATH:
-				setBundleClasspath(BUNDLE_CLASSPATH_EDEFAULT);
-				return;
 			case ModelPackage.PDE_GRAPH__PRODUCTS:
 				getProducts().clear();
-				return;
-			case ModelPackage.PDE_GRAPH__BUNDLE_NAME:
-				setBundleName(BUNDLE_NAME_EDEFAULT);
 				return;
 			case ModelPackage.PDE_GRAPH__BUNDLE_SYMBOLIC_NAME:
 				setBundleSymbolicName(BUNDLE_SYMBOLIC_NAME_EDEFAULT);
@@ -356,12 +252,8 @@ public class PDEGraphImpl extends PluginContainerImpl implements PDEGraph {
 		switch (featureID) {
 			case ModelPackage.PDE_GRAPH__FEATURES:
 				return features != null && !features.isEmpty();
-			case ModelPackage.PDE_GRAPH__BUNDLE_CLASSPATH:
-				return BUNDLE_CLASSPATH_EDEFAULT == null ? bundleClasspath != null : !BUNDLE_CLASSPATH_EDEFAULT.equals(bundleClasspath);
 			case ModelPackage.PDE_GRAPH__PRODUCTS:
 				return products != null && !products.isEmpty();
-			case ModelPackage.PDE_GRAPH__BUNDLE_NAME:
-				return BUNDLE_NAME_EDEFAULT == null ? bundleName != null : !BUNDLE_NAME_EDEFAULT.equals(bundleName);
 			case ModelPackage.PDE_GRAPH__BUNDLE_SYMBOLIC_NAME:
 				return BUNDLE_SYMBOLIC_NAME_EDEFAULT == null ? bundleSymbolicName != null : !BUNDLE_SYMBOLIC_NAME_EDEFAULT.equals(bundleSymbolicName);
 		}
@@ -378,11 +270,7 @@ public class PDEGraphImpl extends PluginContainerImpl implements PDEGraph {
 		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (bundleClasspath: ");
-		result.append(bundleClasspath);
-		result.append(", bundleName: ");
-		result.append(bundleName);
-		result.append(", bundleSymbolicName: ");
+		result.append(" (bundleSymbolicName: ");
 		result.append(bundleSymbolicName);
 		result.append(')');
 		return result.toString();

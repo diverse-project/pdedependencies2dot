@@ -4,16 +4,13 @@
   <eClassifiers xsi:type="ecore:EClass" name="PDEGraph" eSuperTypes="#//PluginContainer">
     <eStructuralFeatures xsi:type="ecore:EReference" name="features" ordered="false"
         upperBound="-1" eType="#//Feature" containment="true" eOpposite="#//Feature/containingGraph"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bundleClasspath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="products" upperBound="-1"
         eType="#//Product" containment="true" eOpposite="#//Product/containingGraph"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bundleName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="bundleSymbolicName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Plugin" eSuperTypes="#//NamedElement #//Processeable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="containingElement" eType="#//PluginContainer"
         eOpposite="#//PluginContainer/plugins"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="classPath" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="exportedBundles" upperBound="-1"
         eType="#//Bundle"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="requiredBundles" upperBound="-1"

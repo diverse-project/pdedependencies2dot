@@ -14,7 +14,6 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.Plugin#getContainingElement <em>Containing Element</em>}</li>
- *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.Plugin#getClassPath <em>Class Path</em>}</li>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.Plugin#getExportedBundles <em>Exported Bundles</em>}</li>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.Plugin#getRequiredBundles <em>Required Bundles</em>}</li>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.Plugin#getImportedPackages <em>Imported Packages</em>}</li>
@@ -49,28 +48,6 @@ public interface Plugin extends NamedElement, Processeable {
 	 * @generated
 	 */
 	void setContainingElement(PluginContainer value);
-
-	/**
-	 * Returns the value of the '<em><b>Class Path</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Class Path</em>' attribute.
-	 * @see #setClassPath(String)
-	 * @see fr.inria.diverse.pdedependencies2dot.model.ModelPackage#getPlugin_ClassPath()
-	 * @model
-	 * @generated
-	 */
-	String getClassPath();
-
-	/**
-	 * Sets the value of the '{@link fr.inria.diverse.pdedependencies2dot.model.Plugin#getClassPath <em>Class Path</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Class Path</em>' attribute.
-	 * @see #getClassPath()
-	 * @generated
-	 */
-	void setClassPath(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Exported Bundles</b></em>' reference list.

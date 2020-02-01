@@ -174,28 +174,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getPDEGraph_BundleClasspath() {
-		return (EAttribute)pdeGraphEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getPDEGraph_Products() {
-		return (EReference)pdeGraphEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getPDEGraph_BundleName() {
-		return (EAttribute)pdeGraphEClass.getEStructuralFeatures().get(3);
+		return (EReference)pdeGraphEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -205,7 +185,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 */
 	@Override
 	public EAttribute getPDEGraph_BundleSymbolicName() {
-		return (EAttribute)pdeGraphEClass.getEStructuralFeatures().get(4);
+		return (EAttribute)pdeGraphEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -234,18 +214,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getPlugin_ClassPath() {
-		return (EAttribute)pluginEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getPlugin_ExportedBundles() {
-		return (EReference)pluginEClass.getEStructuralFeatures().get(2);
+		return (EReference)pluginEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -255,7 +225,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 */
 	@Override
 	public EReference getPlugin_RequiredBundles() {
-		return (EReference)pluginEClass.getEStructuralFeatures().get(3);
+		return (EReference)pluginEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -265,7 +235,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 */
 	@Override
 	public EReference getPlugin_ImportedPackages() {
-		return (EReference)pluginEClass.getEStructuralFeatures().get(4);
+		return (EReference)pluginEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -275,7 +245,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 */
 	@Override
 	public EAttribute getPlugin_Parameters() {
-		return (EAttribute)pluginEClass.getEStructuralFeatures().get(5);
+		return (EAttribute)pluginEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -519,14 +489,11 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		// Create classes and their features
 		pdeGraphEClass = createEClass(PDE_GRAPH);
 		createEReference(pdeGraphEClass, PDE_GRAPH__FEATURES);
-		createEAttribute(pdeGraphEClass, PDE_GRAPH__BUNDLE_CLASSPATH);
 		createEReference(pdeGraphEClass, PDE_GRAPH__PRODUCTS);
-		createEAttribute(pdeGraphEClass, PDE_GRAPH__BUNDLE_NAME);
 		createEAttribute(pdeGraphEClass, PDE_GRAPH__BUNDLE_SYMBOLIC_NAME);
 
 		pluginEClass = createEClass(PLUGIN);
 		createEReference(pluginEClass, PLUGIN__CONTAINING_ELEMENT);
-		createEAttribute(pluginEClass, PLUGIN__CLASS_PATH);
 		createEReference(pluginEClass, PLUGIN__EXPORTED_BUNDLES);
 		createEReference(pluginEClass, PLUGIN__REQUIRED_BUNDLES);
 		createEReference(pluginEClass, PLUGIN__IMPORTED_PACKAGES);
@@ -605,14 +572,11 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		// Initialize classes, features, and operations; add parameters
 		initEClass(pdeGraphEClass, PDEGraph.class, "PDEGraph", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPDEGraph_Features(), this.getFeature(), this.getFeature_ContainingGraph(), "features", null, 0, -1, PDEGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getPDEGraph_BundleClasspath(), ecorePackage.getEString(), "bundleClasspath", null, 0, 1, PDEGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPDEGraph_Products(), this.getProduct(), this.getProduct_ContainingGraph(), "products", null, 0, -1, PDEGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPDEGraph_BundleName(), ecorePackage.getEString(), "bundleName", null, 0, 1, PDEGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPDEGraph_BundleSymbolicName(), ecorePackage.getEString(), "bundleSymbolicName", null, 0, 1, PDEGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(pluginEClass, Plugin.class, "Plugin", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPlugin_ContainingElement(), this.getPluginContainer(), this.getPluginContainer_Plugins(), "containingElement", null, 0, 1, Plugin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPlugin_ClassPath(), theEcorePackage.getEString(), "classPath", null, 0, 1, Plugin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPlugin_ExportedBundles(), this.getBundle(), null, "exportedBundles", null, 0, -1, Plugin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPlugin_RequiredBundles(), this.getBundle(), null, "requiredBundles", null, 0, -1, Plugin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPlugin_ImportedPackages(), this.getPlugin(), null, "importedPackages", null, 0, -1, Plugin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -20,7 +20,6 @@ public interface PluginValidator {
 	boolean validate();
 
 	boolean validateContainingElement(PluginContainer value);
-	boolean validateClassPath(String value);
 	boolean validateExportedBundles(EList<Bundle> value);
 	boolean validateRequiredBundles(EList<Bundle> value);
 	boolean validateImportedPackages(EList<Plugin> value);

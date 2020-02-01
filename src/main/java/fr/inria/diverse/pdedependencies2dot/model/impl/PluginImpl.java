@@ -33,7 +33,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <ul>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PluginImpl#isProcessed <em>Processed</em>}</li>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PluginImpl#getContainingElement <em>Containing Element</em>}</li>
- *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PluginImpl#getClassPath <em>Class Path</em>}</li>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PluginImpl#getExportedBundles <em>Exported Bundles</em>}</li>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PluginImpl#getRequiredBundles <em>Required Bundles</em>}</li>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PluginImpl#getImportedPackages <em>Imported Packages</em>}</li>
@@ -62,26 +61,6 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 	 * @ordered
 	 */
 	protected boolean processed = PROCESSED_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getClassPath() <em>Class Path</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getClassPath()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String CLASS_PATH_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getClassPath() <em>Class Path</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getClassPath()
-	 * @generated
-	 * @ordered
-	 */
-	protected String classPath = CLASS_PATH_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getExportedBundles() <em>Exported Bundles</em>}' reference list.
@@ -224,29 +203,6 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 	 * @generated
 	 */
 	@Override
-	public String getClassPath() {
-		return classPath;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setClassPath(String newClassPath) {
-		String oldClassPath = classPath;
-		classPath = newClassPath;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PLUGIN__CLASS_PATH, oldClassPath, classPath));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EList<Bundle> getExportedBundles() {
 		if (exportedBundles == null) {
 			exportedBundles = new EObjectResolvingEList<Bundle>(Bundle.class, this, ModelPackage.PLUGIN__EXPORTED_BUNDLES);
@@ -359,8 +315,6 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 				return isProcessed();
 			case ModelPackage.PLUGIN__CONTAINING_ELEMENT:
 				return getContainingElement();
-			case ModelPackage.PLUGIN__CLASS_PATH:
-				return getClassPath();
 			case ModelPackage.PLUGIN__EXPORTED_BUNDLES:
 				return getExportedBundles();
 			case ModelPackage.PLUGIN__REQUIRED_BUNDLES:
@@ -387,9 +341,6 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 				return;
 			case ModelPackage.PLUGIN__CONTAINING_ELEMENT:
 				setContainingElement((PluginContainer)newValue);
-				return;
-			case ModelPackage.PLUGIN__CLASS_PATH:
-				setClassPath((String)newValue);
 				return;
 			case ModelPackage.PLUGIN__EXPORTED_BUNDLES:
 				getExportedBundles().clear();
@@ -424,9 +375,6 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 			case ModelPackage.PLUGIN__CONTAINING_ELEMENT:
 				setContainingElement((PluginContainer)null);
 				return;
-			case ModelPackage.PLUGIN__CLASS_PATH:
-				setClassPath(CLASS_PATH_EDEFAULT);
-				return;
 			case ModelPackage.PLUGIN__EXPORTED_BUNDLES:
 				getExportedBundles().clear();
 				return;
@@ -455,8 +403,6 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 				return processed != PROCESSED_EDEFAULT;
 			case ModelPackage.PLUGIN__CONTAINING_ELEMENT:
 				return getContainingElement() != null;
-			case ModelPackage.PLUGIN__CLASS_PATH:
-				return CLASS_PATH_EDEFAULT == null ? classPath != null : !CLASS_PATH_EDEFAULT.equals(classPath);
 			case ModelPackage.PLUGIN__EXPORTED_BUNDLES:
 				return exportedBundles != null && !exportedBundles.isEmpty();
 			case ModelPackage.PLUGIN__REQUIRED_BUNDLES:
@@ -513,8 +459,6 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (processed: ");
 		result.append(processed);
-		result.append(", classPath: ");
-		result.append(classPath);
 		result.append(", parameters: ");
 		result.append(parameters);
 		result.append(')');
