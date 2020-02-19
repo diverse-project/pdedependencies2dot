@@ -15,10 +15,10 @@ import org.eclipse.xtend.lib.annotations.Accessors
 
 class Model2dot {
 
-	private File outputFile;
+	File outputFile;
 
 	// Input
-	private val PDEGraph graph;
+	val PDEGraph graph;
 
 	@Accessors(PUBLIC_SETTER, PRIVATE_GETTER)
 	boolean alwaysPrint;
@@ -29,12 +29,15 @@ class Model2dot {
 	@Accessors(PUBLIC_SETTER, PRIVATE_GETTER)
 	boolean hideExternal
 
-	public def void setOutputFile(File file) {
+	def void setOutputFile(File file) {
 		outputFile = file;
 	}
 
 	new(PDEGraph graph) {
 		this.graph = graph
+		
+		// Replace all . - by _ because dot syntax does not accept digraph names containing . or -
+		this.graph.name = graph.name.replaceAll("[\\.-]","_")
 	}
 
 	private static def String clusterName(String featureName) {
@@ -123,7 +126,7 @@ digraph «graph.name» {
 	«ENDFOR»
 	
 	«FOR Plugin plugin : graph.eAllContents.filter(Plugin).toSet.filter[p|p.shouldDisplay]»
-		«FOR dep : plugin.dependencies.filter[p|p.shouldDisplay]»
+		«FOR dep : plugin.requiredBundles.filter[p|p.shouldDisplay]»
 			"«plugin.name»" -> "«dep.name»" [color="«edgeColor(plugin.containingElement.hue)»"];
 		«ENDFOR» 
 	«ENDFOR»
@@ -142,7 +145,7 @@ digraph «graph.name» {
 		return Math.abs(new Random().nextInt()).toString
 	}
 
-	public def void generate() {
+	def void generate() {
 
 		val String result = generateDot
 

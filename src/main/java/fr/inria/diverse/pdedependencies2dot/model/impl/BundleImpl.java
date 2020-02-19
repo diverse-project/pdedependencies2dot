@@ -4,44 +4,35 @@ package fr.inria.diverse.pdedependencies2dot.model.impl;
 
 import fr.inria.diverse.pdedependencies2dot.model.Bundle;
 import fr.inria.diverse.pdedependencies2dot.model.ModelPackage;
-import fr.inria.diverse.pdedependencies2dot.model.Plugin;
 import fr.inria.diverse.pdedependencies2dot.model.PluginContainer;
 import fr.inria.diverse.pdedependencies2dot.model.Processeable;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Plugin</b></em>'.
+ * An implementation of the model object '<em><b>Bundle</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PluginImpl#isProcessed <em>Processed</em>}</li>
- *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PluginImpl#getContainingElement <em>Containing Element</em>}</li>
- *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PluginImpl#getExportedBundles <em>Exported Bundles</em>}</li>
- *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PluginImpl#getRequiredBundles <em>Required Bundles</em>}</li>
- *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PluginImpl#getImportedPackages <em>Imported Packages</em>}</li>
- *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.PluginImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.BundleImpl#isProcessed <em>Processed</em>}</li>
+ *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.BundleImpl#getContainingElement <em>Containing Element</em>}</li>
+ *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.BundleImpl#getParameters <em>Parameters</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class PluginImpl extends NamedElementImpl implements Plugin {
+public class BundleImpl extends NamedElementImpl implements Bundle {
 	/**
 	 * The default value of the '{@link #isProcessed() <em>Processed</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -61,36 +52,6 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 	 * @ordered
 	 */
 	protected boolean processed = PROCESSED_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getExportedBundles() <em>Exported Bundles</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getExportedBundles()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Bundle> exportedBundles;
-
-	/**
-	 * The cached value of the '{@link #getRequiredBundles() <em>Required Bundles</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRequiredBundles()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Bundle> requiredBundles;
-
-	/**
-	 * The cached value of the '{@link #getImportedPackages() <em>Imported Packages</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getImportedPackages()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Plugin> importedPackages;
 
 	/**
 	 * The default value of the '{@link #getParameters() <em>Parameters</em>}' attribute.
@@ -117,7 +78,7 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected PluginImpl() {
+	protected BundleImpl() {
 		super();
 	}
 
@@ -128,7 +89,7 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ModelPackage.Literals.PLUGIN;
+		return ModelPackage.Literals.BUNDLE;
 	}
 
 	/**
@@ -151,7 +112,7 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 		boolean oldProcessed = processed;
 		processed = newProcessed;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PLUGIN__PROCESSED, oldProcessed, processed));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.BUNDLE__PROCESSED, oldProcessed, processed));
 	}
 
 	/**
@@ -161,7 +122,7 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 	 */
 	@Override
 	public PluginContainer getContainingElement() {
-		if (eContainerFeatureID() != ModelPackage.PLUGIN__CONTAINING_ELEMENT) return null;
+		if (eContainerFeatureID() != ModelPackage.BUNDLE__CONTAINING_ELEMENT) return null;
 		return (PluginContainer)eInternalContainer();
 	}
 
@@ -171,7 +132,7 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 	 * @generated
 	 */
 	public NotificationChain basicSetContainingElement(PluginContainer newContainingElement, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newContainingElement, ModelPackage.PLUGIN__CONTAINING_ELEMENT, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newContainingElement, ModelPackage.BUNDLE__CONTAINING_ELEMENT, msgs);
 		return msgs;
 	}
 
@@ -182,58 +143,19 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 	 */
 	@Override
 	public void setContainingElement(PluginContainer newContainingElement) {
-		if (newContainingElement != eInternalContainer() || (eContainerFeatureID() != ModelPackage.PLUGIN__CONTAINING_ELEMENT && newContainingElement != null)) {
+		if (newContainingElement != eInternalContainer() || (eContainerFeatureID() != ModelPackage.BUNDLE__CONTAINING_ELEMENT && newContainingElement != null)) {
 			if (EcoreUtil.isAncestor(this, newContainingElement))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newContainingElement != null)
-				msgs = ((InternalEObject)newContainingElement).eInverseAdd(this, ModelPackage.PLUGIN_CONTAINER__PLUGINS, PluginContainer.class, msgs);
+				msgs = ((InternalEObject)newContainingElement).eInverseAdd(this, ModelPackage.PLUGIN_CONTAINER__BUNDLES, PluginContainer.class, msgs);
 			msgs = basicSetContainingElement(newContainingElement, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PLUGIN__CONTAINING_ELEMENT, newContainingElement, newContainingElement));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EList<Bundle> getExportedBundles() {
-		if (exportedBundles == null) {
-			exportedBundles = new EObjectResolvingEList<Bundle>(Bundle.class, this, ModelPackage.PLUGIN__EXPORTED_BUNDLES);
-		}
-		return exportedBundles;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EList<Bundle> getRequiredBundles() {
-		if (requiredBundles == null) {
-			requiredBundles = new EObjectResolvingEList<Bundle>(Bundle.class, this, ModelPackage.PLUGIN__REQUIRED_BUNDLES);
-		}
-		return requiredBundles;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EList<Plugin> getImportedPackages() {
-		if (importedPackages == null) {
-			importedPackages = new EObjectResolvingEList<Plugin>(Plugin.class, this, ModelPackage.PLUGIN__IMPORTED_PACKAGES);
-		}
-		return importedPackages;
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.BUNDLE__CONTAINING_ELEMENT, newContainingElement, newContainingElement));
 	}
 
 	/**
@@ -256,7 +178,7 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 		String oldParameters = parameters;
 		parameters = newParameters;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PLUGIN__PARAMETERS, oldParameters, parameters));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.BUNDLE__PARAMETERS, oldParameters, parameters));
 	}
 
 	/**
@@ -267,7 +189,7 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ModelPackage.PLUGIN__CONTAINING_ELEMENT:
+			case ModelPackage.BUNDLE__CONTAINING_ELEMENT:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetContainingElement((PluginContainer)otherEnd, msgs);
@@ -283,7 +205,7 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ModelPackage.PLUGIN__CONTAINING_ELEMENT:
+			case ModelPackage.BUNDLE__CONTAINING_ELEMENT:
 				return basicSetContainingElement(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -297,8 +219,8 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case ModelPackage.PLUGIN__CONTAINING_ELEMENT:
-				return eInternalContainer().eInverseRemove(this, ModelPackage.PLUGIN_CONTAINER__PLUGINS, PluginContainer.class, msgs);
+			case ModelPackage.BUNDLE__CONTAINING_ELEMENT:
+				return eInternalContainer().eInverseRemove(this, ModelPackage.PLUGIN_CONTAINER__BUNDLES, PluginContainer.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -311,17 +233,11 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ModelPackage.PLUGIN__PROCESSED:
+			case ModelPackage.BUNDLE__PROCESSED:
 				return isProcessed();
-			case ModelPackage.PLUGIN__CONTAINING_ELEMENT:
+			case ModelPackage.BUNDLE__CONTAINING_ELEMENT:
 				return getContainingElement();
-			case ModelPackage.PLUGIN__EXPORTED_BUNDLES:
-				return getExportedBundles();
-			case ModelPackage.PLUGIN__REQUIRED_BUNDLES:
-				return getRequiredBundles();
-			case ModelPackage.PLUGIN__IMPORTED_PACKAGES:
-				return getImportedPackages();
-			case ModelPackage.PLUGIN__PARAMETERS:
+			case ModelPackage.BUNDLE__PARAMETERS:
 				return getParameters();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -332,29 +248,16 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ModelPackage.PLUGIN__PROCESSED:
+			case ModelPackage.BUNDLE__PROCESSED:
 				setProcessed((Boolean)newValue);
 				return;
-			case ModelPackage.PLUGIN__CONTAINING_ELEMENT:
+			case ModelPackage.BUNDLE__CONTAINING_ELEMENT:
 				setContainingElement((PluginContainer)newValue);
 				return;
-			case ModelPackage.PLUGIN__EXPORTED_BUNDLES:
-				getExportedBundles().clear();
-				getExportedBundles().addAll((Collection<? extends Bundle>)newValue);
-				return;
-			case ModelPackage.PLUGIN__REQUIRED_BUNDLES:
-				getRequiredBundles().clear();
-				getRequiredBundles().addAll((Collection<? extends Bundle>)newValue);
-				return;
-			case ModelPackage.PLUGIN__IMPORTED_PACKAGES:
-				getImportedPackages().clear();
-				getImportedPackages().addAll((Collection<? extends Plugin>)newValue);
-				return;
-			case ModelPackage.PLUGIN__PARAMETERS:
+			case ModelPackage.BUNDLE__PARAMETERS:
 				setParameters((String)newValue);
 				return;
 		}
@@ -369,22 +272,13 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ModelPackage.PLUGIN__PROCESSED:
+			case ModelPackage.BUNDLE__PROCESSED:
 				setProcessed(PROCESSED_EDEFAULT);
 				return;
-			case ModelPackage.PLUGIN__CONTAINING_ELEMENT:
+			case ModelPackage.BUNDLE__CONTAINING_ELEMENT:
 				setContainingElement((PluginContainer)null);
 				return;
-			case ModelPackage.PLUGIN__EXPORTED_BUNDLES:
-				getExportedBundles().clear();
-				return;
-			case ModelPackage.PLUGIN__REQUIRED_BUNDLES:
-				getRequiredBundles().clear();
-				return;
-			case ModelPackage.PLUGIN__IMPORTED_PACKAGES:
-				getImportedPackages().clear();
-				return;
-			case ModelPackage.PLUGIN__PARAMETERS:
+			case ModelPackage.BUNDLE__PARAMETERS:
 				setParameters(PARAMETERS_EDEFAULT);
 				return;
 		}
@@ -399,17 +293,11 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ModelPackage.PLUGIN__PROCESSED:
+			case ModelPackage.BUNDLE__PROCESSED:
 				return processed != PROCESSED_EDEFAULT;
-			case ModelPackage.PLUGIN__CONTAINING_ELEMENT:
+			case ModelPackage.BUNDLE__CONTAINING_ELEMENT:
 				return getContainingElement() != null;
-			case ModelPackage.PLUGIN__EXPORTED_BUNDLES:
-				return exportedBundles != null && !exportedBundles.isEmpty();
-			case ModelPackage.PLUGIN__REQUIRED_BUNDLES:
-				return requiredBundles != null && !requiredBundles.isEmpty();
-			case ModelPackage.PLUGIN__IMPORTED_PACKAGES:
-				return importedPackages != null && !importedPackages.isEmpty();
-			case ModelPackage.PLUGIN__PARAMETERS:
+			case ModelPackage.BUNDLE__PARAMETERS:
 				return PARAMETERS_EDEFAULT == null ? parameters != null : !PARAMETERS_EDEFAULT.equals(parameters);
 		}
 		return super.eIsSet(featureID);
@@ -424,7 +312,7 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == Processeable.class) {
 			switch (derivedFeatureID) {
-				case ModelPackage.PLUGIN__PROCESSED: return ModelPackage.PROCESSEABLE__PROCESSED;
+				case ModelPackage.BUNDLE__PROCESSED: return ModelPackage.PROCESSEABLE__PROCESSED;
 				default: return -1;
 			}
 		}
@@ -440,7 +328,7 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == Processeable.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.PROCESSEABLE__PROCESSED: return ModelPackage.PLUGIN__PROCESSED;
+				case ModelPackage.PROCESSEABLE__PROCESSED: return ModelPackage.BUNDLE__PROCESSED;
 				default: return -1;
 			}
 		}
@@ -465,4 +353,4 @@ public class PluginImpl extends NamedElementImpl implements Plugin {
 		return result.toString();
 	}
 
-} //PluginImpl
+} //BundleImpl

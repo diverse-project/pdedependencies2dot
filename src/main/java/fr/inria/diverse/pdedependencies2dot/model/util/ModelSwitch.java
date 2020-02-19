@@ -110,6 +110,23 @@ public class ModelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ModelPackage.BUNDLE: {
+				Bundle bundle = (Bundle)theEObject;
+				T result = caseBundle(bundle);
+				if (result == null) result = caseNamedElement(bundle);
+				if (result == null) result = caseProcesseable(bundle);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.PRODUCT: {
+				Product product = (Product)theEObject;
+				T result = caseProduct(product);
+				if (result == null) result = casePluginContainer(product);
+				if (result == null) result = caseProcesseable(product);
+				if (result == null) result = caseNamedElement(product);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -201,6 +218,36 @@ public class ModelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseProcesseable(Processeable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Bundle</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Bundle</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBundle(Bundle object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Product</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Product</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseProduct(Product object) {
 		return null;
 	}
 

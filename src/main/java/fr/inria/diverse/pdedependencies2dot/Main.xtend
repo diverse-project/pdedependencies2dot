@@ -9,7 +9,7 @@ import org.kohsuke.args4j.CmdLineException
 import org.kohsuke.args4j.CmdLineParser
 import org.kohsuke.args4j.Option
 
-public class Main {
+class Main {
 	enum Orientation {
 		horizontal,
 		vertical
@@ -42,15 +42,15 @@ public class Main {
 	@Option(name="--hideExternal", usage="If set, external dependencies/references for which no MANIFEST.MF/plugin.xml was found are not displayed.")
 	public Boolean hideExternal;
 
-	private static val String foldersDisplayedString = "folder1,folder2,..."
+	static val String foldersDisplayedString = "folder1,folder2,..."
 	@Argument(required=true, usage="List of folders recursively containing plugins and features.", metaVar=foldersDisplayedString)
 	public List<File> folders = new ArrayList<File>();
 
-	public def static void main(String[] args) {
+	def static void main(String[] args) {
 		new Main().doMain(args)
 	}
 
-	public def void doMain(String[] args) {
+	def void doMain(String[] args) {
 		val CmdLineParser parser = new CmdLineParser(this);
 		parser.properties.withUsageWidth(80).withOptionValueDelimiter("=");
 

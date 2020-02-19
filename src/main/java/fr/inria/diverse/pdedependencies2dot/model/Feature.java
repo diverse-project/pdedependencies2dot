@@ -28,10 +28,6 @@ public interface Feature extends PluginContainer, Processeable {
 	 * Returns the value of the '<em><b>Required Features</b></em>' reference list.
 	 * The list contents are of type {@link fr.inria.diverse.pdedependencies2dot.model.Feature}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Required Features</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Required Features</em>' reference list.
 	 * @see fr.inria.diverse.pdedependencies2dot.model.ModelPackage#getFeature_RequiredFeatures()
@@ -44,10 +40,6 @@ public interface Feature extends PluginContainer, Processeable {
 	 * Returns the value of the '<em><b>Containing Graph</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link fr.inria.diverse.pdedependencies2dot.model.PDEGraph#getFeatures <em>Features</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Containing Graph</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Containing Graph</em>' container reference.
 	 * @see #setContainingGraph(PDEGraph)
@@ -72,10 +64,6 @@ public interface Feature extends PluginContainer, Processeable {
 	 * Returns the value of the '<em><b>Additionnal Plugins</b></em>' reference list.
 	 * The list contents are of type {@link fr.inria.diverse.pdedependencies2dot.model.Plugin}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Additionnal Plugins</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Additionnal Plugins</em>' reference list.
 	 * @see fr.inria.diverse.pdedependencies2dot.model.ModelPackage#getFeature_AdditionnalPlugins()
@@ -88,10 +76,6 @@ public interface Feature extends PluginContainer, Processeable {
 	 * Returns the value of the '<em><b>Required Plugins</b></em>' reference list.
 	 * The list contents are of type {@link fr.inria.diverse.pdedependencies2dot.model.Plugin}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Required Plugins</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Required Plugins</em>' reference list.
 	 * @see fr.inria.diverse.pdedependencies2dot.model.ModelPackage#getFeature_RequiredPlugins()

@@ -6,7 +6,7 @@ Given a folder full of Eclipse plugins projects and features projects, generates
 
 ![Example](https://raw.githubusercontent.com/diverse-project/pdedependencies2dot/master/example.png)
 
-## Options 
+## Options
 
 ~~~~
 Usage: java -jar pdedependencies2dot-1.0-shaded.jar [options...] <folder1,folder2,...>

@@ -70,6 +70,7 @@ public abstract class ProcesseableImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isProcessed() {
 		return processed;
 	}
@@ -79,6 +80,7 @@ public abstract class ProcesseableImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setProcessed(boolean newProcessed) {
 		boolean oldProcessed = processed;
 		processed = newProcessed;
@@ -153,7 +155,7 @@ public abstract class ProcesseableImpl extends MinimalEObjectImpl.Container impl
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (processed: ");
 		result.append(processed);
 		result.append(')');

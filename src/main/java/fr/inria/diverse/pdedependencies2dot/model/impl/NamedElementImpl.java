@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * </p>
  * <ul>
  *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.NamedElementImpl#getName <em>Name</em>}</li>
+ *   <li>{@link fr.inria.diverse.pdedependencies2dot.model.impl.NamedElementImpl#getVersion <em>Version</em>}</li>
  * </ul>
  *
  * @generated
@@ -47,6 +48,26 @@ public abstract class NamedElementImpl extends MinimalEObjectImpl.Container impl
 	protected String name = NAME_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVersion()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String VERSION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVersion()
+	 * @generated
+	 * @ordered
+	 */
+	protected String version = VERSION_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -70,6 +91,7 @@ public abstract class NamedElementImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -79,6 +101,7 @@ public abstract class NamedElementImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -92,10 +115,35 @@ public abstract class NamedElementImpl extends MinimalEObjectImpl.Container impl
 	 * @generated
 	 */
 	@Override
+	public String getVersion() {
+		return version;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setVersion(String newVersion) {
+		String oldVersion = version;
+		version = newVersion;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.NAMED_ELEMENT__VERSION, oldVersion, version));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ModelPackage.NAMED_ELEMENT__NAME:
 				return getName();
+			case ModelPackage.NAMED_ELEMENT__VERSION:
+				return getVersion();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -110,6 +158,9 @@ public abstract class NamedElementImpl extends MinimalEObjectImpl.Container impl
 		switch (featureID) {
 			case ModelPackage.NAMED_ELEMENT__NAME:
 				setName((String)newValue);
+				return;
+			case ModelPackage.NAMED_ELEMENT__VERSION:
+				setVersion((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -126,6 +177,9 @@ public abstract class NamedElementImpl extends MinimalEObjectImpl.Container impl
 			case ModelPackage.NAMED_ELEMENT__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case ModelPackage.NAMED_ELEMENT__VERSION:
+				setVersion(VERSION_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -140,6 +194,8 @@ public abstract class NamedElementImpl extends MinimalEObjectImpl.Container impl
 		switch (featureID) {
 			case ModelPackage.NAMED_ELEMENT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case ModelPackage.NAMED_ELEMENT__VERSION:
+				return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -153,9 +209,11 @@ public abstract class NamedElementImpl extends MinimalEObjectImpl.Container impl
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", version: ");
+		result.append(version);
 		result.append(')');
 		return result.toString();
 	}
